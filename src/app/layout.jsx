@@ -1,3 +1,4 @@
+import Header from "@/components/header";
 import "./globals.css";
 import { Bagel_Fat_One, Nanum_Gothic } from "next/font/google";
 
@@ -5,6 +6,7 @@ export const fat = Bagel_Fat_One({
   subsets: ["latin"],
   display: "swap",
   weight: "400",
+  variable: "--font-fat",
 });
 
 export const nanum = Nanum_Gothic({
@@ -12,6 +14,7 @@ export const nanum = Nanum_Gothic({
   style: ["normal"],
   subsets: ["latin"],
   display: "swap",
+  variable: "--font-nanum",
 });
 
 export const metadata = {
@@ -22,7 +25,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="ko" className={nanum.className}>
-      <body>{children}</body>
+      <body>
+        <Header />
+        <main>{children}</main>
+      </body>
     </html>
   );
 }

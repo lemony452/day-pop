@@ -1,0 +1,23 @@
+.cardWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.image {
+  /* width: 160px;
+  height: 160px; */
+  background-color: var(--gray);
+  border-radius: 10px;
+}
+
+.title {
+  font-size: 1.25rem;
+  text-decoration: none;
+  color: white;
+}
+
+.artist {
+  color: var(--gray);
+  text-decoration: none;
+}

@@ -1,0 +1,47 @@
+.header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  font-family: var(--font-fat);
+}
+
+.wraper {
+  height: 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.logo {
+  font-size: var(--logo);
+  color: white;
+
+  text-decoration: none;
+}
+
+.menu {
+  cursor: pointer;
+}
+
+.button {
+  height: 40px;
+  padding: 5px 10px;
+  font-family: var(--font-fat);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 1rem;
+  text-align: center;
+  line-height: 0;
+  cursor: pointer;
+}
+
+.studyOver {
+  background-color: var(--red);
+}
+
+.toMain {
+  background-color: var(--blue);
+}
