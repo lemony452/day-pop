@@ -4,8 +4,8 @@ const JWT_SECRET = process.env.JWT_SECRET;
 
 module.exports = {
   // secret키로 access 토큰 발급
-  sign: (user) => {
-    const payload = { id: user._id };
+  sign: (userId) => {
+    const payload = { id: userId };
     return jwt.sign(payload, JWT_SECRET, {
       algorithm: "HS256", // 암호화 알고리즘
       expiresIn: "1h", // 1시간 유효기간
@@ -28,7 +28,7 @@ module.exports = {
   },
   // refresh 토큰 발급
   refresh: () => {
-    return jwt.sign({}, secret, {
+    return jwt.sign({}, JWT_SECRET, {
       // refresh token은 payload 없이 발급
       algorithm: "HS256",
       expiresIn: "14d", // 2주 유효기간
