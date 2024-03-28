@@ -17,10 +17,12 @@ const UserSchema = new Schema({
   refreshToken: String,
   grade: String,
   score: Number,
-  email: {
+  spotifyId: {
     type: String,
     unique: true,
   },
+  userId: String,
+  userPassword: String,
 });
 
 module.exports = mongoose.model("User", UserSchema);
