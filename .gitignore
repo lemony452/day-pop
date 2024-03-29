@@ -37,5 +37,5 @@ yarn-error.log*
 next-env.d.ts
 
 # server
-/server/node_modules
-/server/.env
+server/node_modules
+server/.env
