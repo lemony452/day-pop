@@ -27,9 +27,10 @@ export default function CallbackPage() {
       if (tokenInfo) {
         localStorage.setItem("spotify_access_token", tokenInfo.access_token);
         localStorage.setItem("spotify_refresh_token", tokenInfo.refresh_token);
-        localStorage.setItem("spotifyId", userInfo.id);
+        // spotifyId를 query string으로 넘겨주도록 변경
+        // localStorage.setItem("spotifyId", userInfo.id);
         if (isSign) router.push("/login");
-        else router.push("/signup");
+        else router.push(`/signup?spotifyId=${userInfo.id}`);
       }
     };
     if (isRender) {

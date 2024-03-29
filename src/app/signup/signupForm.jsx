@@ -2,16 +2,17 @@
 
 import Button from "@/components/btn";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useRef } from "react";
 
 export default function SignupForm({ styles }) {
+  const { spotifyId } = useSearchParams();
   const router = useRouter();
   const formRef = useRef(null);
 
   const handleSignup = async (event) => {
     event.preventDefault();
-    const spotifyId = localStorage.getItem("spotifyId");
+    // const spotifyId = localStorage.getItem("spotifyId");
     const data = {
       id: formRef.current.id.value,
       passwordValue: formRef.current.passwordValue.value,
