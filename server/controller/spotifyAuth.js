@@ -10,7 +10,9 @@ const client_secret = process.env.client_secret;
 // 인가코드를 요청할 주소 url 가져오기
 module.exports.getCode = (req, res) => {
   const state = generateRandomString(16);
-  const scope = "user-read-private user-read-email";
+  const scope =
+    "user-read-private user-read-email user-read-playback-state user-modify-playback-state streaming";
+  // const scope = "user-read-private user-read-email";
 
   res.json(
     "https://accounts.spotify.com/authorize?" +
@@ -65,7 +67,7 @@ module.exports.spotifyLogin = (req, res) => {
 };
 
 module.exports.getRefreshToken = (req, res) => {
-  console.log("--------리프레시토큰 재발급--------");
+  console.log("--------토큰 재발급--------");
   const { refresh_token } = req.body;
   const authOptions = {
     url: "https://accounts.spotify.com/api/token",
