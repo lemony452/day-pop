@@ -12,7 +12,7 @@ router.route("/code").get(getCode);
 
 router.route("/spotify/login").get(spotifyLogin);
 
-router.route("/refreshToken").post(getRefreshToken);
+router.route("/spotify/refresh").post(getRefreshToken);
 
 router.route("/login").post(login);
 
