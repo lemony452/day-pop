@@ -1,9 +1,11 @@
 "use client";
 
 import Button from "@/components/btn";
+import { login } from "@/lib/auth";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useRef } from "react";
+import { setCookie } from "cookies-next";
 
 export default function LoginForm({ styles }) {
   const router = useRouter();
@@ -15,23 +17,25 @@ export default function LoginForm({ styles }) {
       id: formRef.current.id.value,
       passwordValue: formRef.current.passwordValue.value,
     };
-    const config = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    };
+    // const config = {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(data),
+    // };
     try {
-      const res = await fetch(
-        process.env.NEXT_PUBLIC_LOCAL_SERVER_URL + "/login",
-        config
-      );
-      const { access_token, refresh_token } = await res.json();
+      // const res = await fetch(
+      //   process.env.NEXT_PUBLIC_LOCAL_SERVER_URL + "/login",
+      //   config
+      // );
+      const { access_token, refresh_token } = await login(data);
       if (access_token) {
-        localStorage.setItem("access_token", access_token);
-        localStorage.setItem("refresh_token", refresh_token);
-        return router.push("/");
+        setCookie("access_token", access_token);
+        setCookie("refresh_token", refresh_token);
+        // localStorage.setItem("access_token", access_token);
+        // localStorage.setItem("refresh_token", refresh_token);
+        return router.push("/playlist");
       }
     } catch (e) {
       alert("로그인에 실패하였습니다.");
