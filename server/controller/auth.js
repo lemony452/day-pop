@@ -55,7 +55,7 @@ module.exports = {
     const refresh_token = refreshToken;
 
     if (!access_token || !refresh_token)
-      throw new AppError(400, "유효하지 않은 요청입니다");
+      throw new AppError(401, "로그인이 필요합니다");
 
     const checkToken = verify(access_token);
     // 1. 액세스 토큰이 만료되지 않은 경우
@@ -64,7 +64,7 @@ module.exports = {
 
     // 2. 엑세스 토큰이 만료된 경우
     const decoded = jwt.decode(access_token);
-    if (!decoded) throw new AppError(401, "유효하지 않은 요청입니다");
+    if (!decoded) throw new AppError(401, "로그인이 필요합니다");
     // 유저 고유 id를 가져와 리프레시 토큰 검증하기
     const checkRefresh = verifyRefresh(refresh_token, decoded.id);
 
