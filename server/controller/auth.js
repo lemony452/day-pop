@@ -9,7 +9,7 @@ module.exports = {
   login: async (req, res) => {
     const { id, passwordValue } = req.body;
     const user = await User.findOne({ userId: id });
-    if (!user) throw new AppError(400, "해당 유저는 존재하지 않습니다");
+    if (!user) throw new AppError(400, "회원가입이 필요합니다");
 
     if (bcrypt.compareSync(passwordValue, user.userPassword)) {
       const access_token = sign(user._id);
