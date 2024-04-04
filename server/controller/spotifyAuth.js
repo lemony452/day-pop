@@ -54,7 +54,6 @@ module.exports.spotifyLogin = (req, res) => {
         const tokenInfo = body;
         const userInfo = await getUserInfo(tokenInfo.access_token);
         const user = await User.exists({ spotifyId: userInfo.id });
-        console.log(user);
         if (user) res.status(200).json({ tokenInfo, isSign: true, userInfo });
         else res.status(200).json({ tokenInfo, isSign: false, userInfo });
       } else {
@@ -67,7 +66,6 @@ module.exports.spotifyLogin = (req, res) => {
 };
 
 module.exports.getRefreshToken = (req, res) => {
-  console.log("--------토큰 재발급--------");
   const { refresh_token } = req.body;
   const authOptions = {
     url: "https://accounts.spotify.com/api/token",
@@ -88,7 +86,6 @@ module.exports.getRefreshToken = (req, res) => {
 
   request.post(authOptions, function (error, response, body) {
     if (!error && response.statusCode === 200) {
-      console.log("새로 받은 토큰 정보 : ", body);
       res.status(200).json(body);
     } else {
       res.status(500).json("리프레시 토큰을 가져오기 실패");
