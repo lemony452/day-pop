@@ -50,26 +50,29 @@ module.exports = {
    * @param {} res
    */
   refresh: async (req, res) => {
-    const { Authorizaiton, refreshToken } = req.headers;
-    const access_token = Authorizaiton.split("Bearer ")[1];
-    const refresh_token = refreshToken;
+    const { authorizaiton, refreshtoken } = req.headers;
+    const access_token = authorizaiton.split("Bearer ")[1];
+    const refresh_token = refreshtoken;
 
     if (!access_token || !refresh_token)
-      throw new AppError(401, "로그인이 필요합니다");
+      return res.status(401).json("로그인이 필요합니다");
+    // throw new AppError(401, "로그인이 필요합니다");
 
     const checkToken = verify(access_token);
     // 1. 액세스 토큰이 만료되지 않은 경우
     if (checkToken.ok)
-      throw new AppError(400, "엑세스 토큰이 만료되지 않았습니다");
+      return res.status(204).json("액세스 토큰이 만료되지 않았습니다");
+    // throw new AppError(400, "엑세스 토큰이 만료되지 않았습니다");
 
     // 2. 엑세스 토큰이 만료된 경우
     const decoded = jwt.decode(access_token);
-    if (!decoded) throw new AppError(401, "로그인이 필요합니다");
+    if (!decoded) return res.status(401).json("로그인이 필요합니다");
+    // throw new AppError(401, "로그인이 필요합니다");
     // 유저 고유 id를 가져와 리프레시 토큰 검증하기
-    const checkRefresh = verifyRefresh(refresh_token, decoded.id);
-
+    const checkRefresh = await verifyRefresh(refresh_token, decoded.id);
     // 2.1 리프레시 토큰도 만료된 경우 로그인 필요
-    if (!checkRefresh.ok) throw new AppError(401, "로그인이 필요합니다");
+    if (!checkRefresh.ok) return res.status(401).json("로그인이 필요합니다");
+    // throw new AppError(401, "로그인이 필요합니다");
     // 2.2 액세스 토큰을 재발급하기
     const newAccessToken = sign(decoded.id);
     res.status(200).json({ access_token: newAccessToken, refresh_token });
