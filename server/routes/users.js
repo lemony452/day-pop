@@ -18,6 +18,6 @@ router.route("/login").post(login);
 
 router.route("/signup").post(signup);
 
-router.route("/refresh").get(refresh);
+router.route("/refresh").post(refresh);
 
 module.exports = router;
