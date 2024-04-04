@@ -2,14 +2,15 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const PopsongSchema = new Schema({
+  userId: String,
   title: String,
   artist: String,
   date: { type: Date, default: new Date() },
   originalLyrics: [String],
   trackId: String,
-  save: {
+  savedData: {
     sentenceIdx: { type: Number, default: 0 },
-    studyingLyrics: [String],
+    studyingLyrics: { type: [String], default: [] },
     grade: { type: String, default: "-" },
     score: { type: Number, default: 0 },
     perfect: { type: Number, default: 0 },
