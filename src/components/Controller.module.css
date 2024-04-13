@@ -1,0 +1,18 @@
+.player-control {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.player-time {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.75rem;
+}
+
+.player-progressbar {
+  width: 300px;
+  border: 2px solid var(--gray);
+  border-radius: 5px;
+}
