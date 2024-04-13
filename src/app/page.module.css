@@ -33,25 +33,3 @@
   border-radius: 10px;
   margin-top: 30px;
 }
-
-.playlist-section {
-  width: 100%;
-  padding-top: 100px;
-}
-
-.playlist-wrapper {
-  margin: 0 auto;
-  max-width: 1000px;
-}
-
-.playlist-wrapper h1 {
-  font-size: 1.5rem;
-  margin-bottom: 20px;
-}
-
-.top10-playlist {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  /* grid-template-rows: 100px; */
-  grid-gap: 10px;
-}
