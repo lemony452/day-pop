@@ -1,0 +1,67 @@
+import { cookies } from "next/headers";
+import MyPlaylistItem from "./myplaylist-item";
+import styles from "./page.module.css";
+import { getSpotifyRefresh } from "@/lib/auth";
+import Link from "next/link";
+
+export const HEADERS = (access_token) => {
+  return {
+    Authorization: "Bearer " + access_token,
+  };
+};
+
+const getMyPlaylist = async (access_token) => {
+  const res = await fetch("https://api.spotify.com/v1/me/playlists", {
+    headers: HEADERS(access_token),
+  });
+
+  return await res.json();
+};
+
+const getTracks = async (access_token, trackHref) => {
+  const res = await fetch(trackHref, { headers: HEADERS(access_token) });
+  return await res.json();
+};
+
+export default async function MyplaylistPage() {
+  const cookiesStore = cookies();
+  const spotify_refresh_token = cookiesStore.get("spotify_refresh_token");
+
+  const tokenInfo = await getSpotifyRefresh(spotify_refresh_token.value);
+
+  const playlist = await getMyPlaylist(tokenInfo.access_token);
+  const myplaylist = playlist.items[0].tracks;
+
+  const tracksInfo = await getTracks(tokenInfo.access_token, myplaylist.href);
+
+  return (
+    <section className={styles.myplaylist}>
+      <div className={styles["myplaylist-wrapper"]}>
+        <div className={styles["myplaylist-header"]}>
+          <div className={styles.name}>🎵 내 플레이리스트</div>
+          <div className={styles.total}>{myplaylist.total} 곡</div>
+        </div>
+        <div className={styles["myplaylist-flex"]}>
+          <div className={styles["myplaylist-flex-header"]}>
+            <div>Title</div>
+            <div>Album</div>
+            <div>Time</div>
+          </div>
+          <ul>
+            {tracksInfo.items.map((trackInfo) => (
+              <Link
+                href={{
+                  pathname: "/detail",
+                  query: { trackId: trackInfo.track.id },
+                }}
+                key={trackInfo.track.id}
+              >
+                <MyPlaylistItem trackInfo={trackInfo}></MyPlaylistItem>
+              </Link>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+  );
+}

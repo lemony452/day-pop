@@ -1,0 +1,80 @@
+.myplaylist {
+  padding-top: 140px;
+}
+
+.myplaylist-wrapper {
+  margin: 0 auto;
+  width: 80%;
+  max-width: 850px;
+  min-width: 480px;
+  font-size: 1rem;
+}
+
+.myplaylist-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.name {
+  font-size: 2rem;
+}
+
+.total {
+  font-size: 1.5rem;
+}
+
+.myplaylist-flex {
+  margin-top: 40px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.myplaylist-flex ul {
+  max-height: 500px;
+  overflow-y: scroll;
+}
+
+.myplaylist-flex ul a {
+  text-decoration: none;
+}
+
+.myplaylist-flex-header {
+  display: grid;
+  grid-template-columns: 4fr 2fr 1fr;
+  border-bottom: 1px solid white;
+  color: #9f9f9f;
+  padding: 0 10px 10px 10px;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 4fr 2fr 1fr;
+  padding: 10px;
+  color: #9f9f9f;
+  align-items: center;
+}
+
+.item:hover {
+  background-color: #262626;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.item-image {
+  border-radius: 5px;
+}
+
+.item-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.item-name {
+  font-size: 1.25rem;
+  margin-bottom: 10px;
+  color: white;
+}
