@@ -1,0 +1,51 @@
+.loading {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.loader {
+  height: 3rem;
+  width: 14rem;
+  border-radius: 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.loader::after {
+  content: "";
+  position: absolute;
+  width: 10rem;
+  height: 3rem;
+  border-radius: 3rem;
+  background: white;
+  box-shadow: 0 -0.6rem 0 rgba(220, 218, 100, 0.396) inset;
+
+  animation: slide 4s ease-in-out infinite;
+}
+
+.loader:nth-child(2)::after {
+  animation-delay: 0.2s;
+}
+
+.loader:nth-child(3)::after {
+  animation-delay: 0.4s;
+}
+
+@keyframes slide {
+  0% {
+    left: -7rem;
+  }
+
+  50% {
+    left: calc(100% - 3rem);
+  }
+
+  100% {
+    left: -7rem;
+  }
+}
