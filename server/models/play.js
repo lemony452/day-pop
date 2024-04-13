@@ -8,11 +8,11 @@ const PopsongSchema = new Schema({
   date: { type: Date, default: new Date() },
   originalLyrics: [String],
   trackId: String,
+  grade: { type: String, default: "-" },
+  score: { type: Number, default: 0 },
   savedData: {
     sentenceIdx: { type: Number, default: 0 },
     studyingLyrics: { type: [String], default: [] },
-    grade: { type: String, default: "-" },
-    score: { type: Number, default: 0 },
     perfect: { type: Number, default: 0 },
     great: { type: Number, default: 0 },
     good: { type: Number, default: 0 },
