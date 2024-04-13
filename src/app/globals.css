@@ -4,6 +4,12 @@
   --gray: #ababab;
   --green: #2ab548;
 
+  --perfect: #fbff32;
+  --great: #63e227;
+  --good: #3970ff;
+  --bad: #6322b7;
+  --miss: #ea3535;
+
   --logo: 24px;
   --primary-size: 16px;
 }
@@ -29,4 +35,32 @@ button {
 
 main {
   height: 100%;
+}
+
+.perfect {
+  color: var(--perfect);
+}
+.great {
+  color: var(--great);
+}
+.good {
+  color: var(--good);
+}
+.bad {
+  color: var(--bad);
+}
+.miss {
+  color: var(--miss);
+}
+
+dialog {
+  position: absolute;
+  left: 50vw;
+  top: 50vh;
+  transform: translate(-50%, -50%);
+}
+
+dialog::backdrop {
+  opacity: 0.5;
+  background-color: black;
 }
