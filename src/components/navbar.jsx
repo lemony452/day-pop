@@ -5,23 +5,14 @@ import Button from "./btn";
 import styles from "./header.module.css";
 import Link from "next/link";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
-import { useRouter, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { savingStudyPopsong } from "@/lib/study/thunks";
-import { openModal } from "@/lib/modal/modalSlice";
-import { getCookie, setCookie } from "cookies-next";
-import { useEffect } from "react";
-import { verifyToken } from "@/lib/user/thunks";
 
 export default function Nav() {
   const pathName = usePathname();
-  console.log(pathName);
 
   const { studying, popsongInfo } = useAppSelector((state) => state.study);
   const dispatch = useAppDispatch();
-  const router = useRouter();
-
-  const ACCESS_TOKEN = getCookie("access_token");
-  const REFRESH_TOKEN = getCookie("refresh_token");
 
   const savingData = {
     popsongId: popsongInfo.popsongId,
@@ -39,17 +30,6 @@ export default function Nav() {
   const handleFinishStudy = () => {
     dispatch(savingStudyPopsong(savingData));
   };
-
-  // useEffect(() => {
-  //   dispatch(verifyToken(ACCESS_TOKEN, REFRESH_TOKEN))
-  // }, [dispatch])
-
-  // if (pathName === "/study" && studying.isDone) {
-  //   if (savingData) {
-  //     dispatch(savingStudyPopsong(savingData));
-  //     router("/")
-  //   } else router
-  // }
 
   return (
     <div className={styles["nav-items"]}>
