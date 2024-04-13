@@ -1,11 +1,17 @@
 import Image from "next/image";
 import styles from "./page.module.css";
-import Link from "next/link";
-import Card from "@/components/card";
-import Search from "@/components/search";
+
 import Button from "@/components/btn";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 export default async function Home() {
+  const cookiesStore = cookies();
+
+  const access_token = cookiesStore.get("access_token");
+
+  if (access_token) redirect("/myplaylist");
+
   return (
     <section className={styles.welcome}>
       <div>
@@ -17,35 +23,6 @@ export default async function Home() {
         <Button isLogin={true} className={styles.loginBtn}>
           로그인
         </Button>
-        {/* <SpotifyLogin className={styles.loginBtn}>로그인</SpotifyLogin> */}
-      </div>
-    </section>
-    // <Playlist></Playlist>
-  );
-}
-
-function Playlist() {
-  const temp = new Array(5).fill(0);
-  return (
-    <section className={styles["playlist-section"]}>
-      <div className={styles["playlist-wrapper"]}>
-        <Search></Search>
-        <h1>요즘 인기있는 팝송 TOP 10</h1>
-        <div className={styles["top10-playlist"]}>
-          {temp.map((v, idx) => (
-            <Link href={`/${idx}`} key={idx}>
-              <Card imgSize={160}></Card>
-            </Link>
-          ))}
-        </div>
-        <h1>최근 학습한 곡과 유사한 팝송</h1>
-        <div className={styles["top10-playlist"]}>
-          {temp.map((v, idx) => (
-            <Link href={`/${idx}`} key={idx}>
-              <Card imgSize={160}></Card>
-            </Link>
-          ))}
-        </div>
       </div>
     </section>
   );
