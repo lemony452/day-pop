@@ -1,12 +1,15 @@
 "use client";
 
 import Button from "@/components/btn";
+import { signup } from "@/lib/auth";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useRef } from "react";
+import { setCookie } from "cookies-next";
 
 export default function SignupForm({ styles }) {
-  const { spotifyId } = useSearchParams();
+  const searchParams = useSearchParams();
+  const spotifyId = searchParams.get("spotifyId");
   const router = useRouter();
   const formRef = useRef(null);
 
@@ -20,24 +23,27 @@ export default function SignupForm({ styles }) {
       spotifyId,
     };
     console.log(data);
-    const res = await fetch(
-      process.env.NEXT_PUBLIC_LOCAL_SERVER_URL + "/signup",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      }
-    );
-    const { access_token, refresh_token } = await res.json();
+    // const res = await fetch(
+    //   process.env.NEXT_PUBLIC_LOCAL_SERVER_URL + "/signup",
+    //   {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify(data),
+    //   }
+    // );
+    const { access_token, refresh_token } = await signup(data);
     if (access_token) {
-      localStorage.setItem("access_token", access_token);
-      localStorage.setItem("refresh_token", refresh_token);
+      setCookie("access_token", access_token);
+      setCookie("refresh_token", refresh_token);
+      router.push("/playlist");
+      // localStorage.setItem("access_token", access_token);
+      // localStorage.setItem("refresh_token", refresh_token);
     } else {
       alert("회원가입에 실패하였습니다.");
     }
-    return router.push("/");
+    router.push("/");
   };
 
   return (
