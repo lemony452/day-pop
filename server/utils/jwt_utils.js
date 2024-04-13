@@ -47,9 +47,10 @@ module.exports = {
           message: e.message,
         };
       }
+    } else {
+      return {
+        ok: false,
+      };
     }
-    return {
-      ok: false,
-    };
   },
 };
