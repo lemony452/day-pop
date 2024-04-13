@@ -48,15 +48,58 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
+}
+
+@keyframes fadeinout {
+  0% {
+    opacity: 0;
+    font-size: 1rem;
+  }
+
+  25% {
+    opacity: 0.5;
+    font-size: 2rem;
+  }
+
+  50% {
+    opacity: 1;
+    font-size: 5rem;
+  }
+
+  75% {
+    opacity: 0.5;
+    font-size: 2rem;
+  }
+
+  100% {
+    opacity: 0;
+    font-size: 1rem;
+  }
 }
 
 .rating {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   font-family: var(--font-fat);
-  font-size: 5rem;
   -webkit-text-stroke: 1px #636363;
   text-shadow: 4px 4px 2px #b1b1b1;
+  opacity: 0;
+  animation-name: fadeinout;
+  animation-duration: 1s;
 }
 
 .lyrics {
+  display: flex;
+  overflow-y: scroll;
   font-size: 1.5rem;
+  /* height: 150px; */
+  color: white;
+  gap: 20px;
+}
+
+.lyrics div {
+  /* border-bottom: 1px solid white; */
 }
