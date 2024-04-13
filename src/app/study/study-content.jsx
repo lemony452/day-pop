@@ -1,26 +1,20 @@
 "use client";
 
-import { getCookie, setCookie } from "cookies-next";
 import RemainSentence from "./remain-sentence";
 import Result from "./result";
 import SentenceInput from "./sentence-input";
-import { useEffect, useState } from "react";
-import { getRefresh } from "@/lib/auth";
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { getPopsongInfo } from "@/lib/play";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { fetchPopsongById, savingStudyPopsong } from "@/lib/study/thunks";
 import { closeModal, openModal } from "@/lib/modal/modalSlice";
 import { studyActions } from "@/lib/study/studySlice";
 
 let isRender = false;
-const ACCESS_TOKEN = getCookie("access_token");
-const REFRESH_TOKEN = getCookie("refresh_token");
 
 export default function StudyContent({ trackId }) {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const [accessToken, setAccessToken] = useState(ACCESS_TOKEN);
   const { studying, popsongInfo, result, fetchStatus, saveStatus } =
     useAppSelector((state) => state.study);
 
@@ -41,29 +35,6 @@ export default function StudyContent({ trackId }) {
     grade: result.grade,
   };
 
-  const verifyToken = async () => {
-    console.log("토큰 검증");
-    try {
-      const res = await getRefresh(accessToken, REFRESH_TOKEN);
-      console.log(res);
-      if (!res.ok) {
-        if (res.status === 401) return router("/login");
-        else if (res.status !== 400) throw new Error("에러가 발생하였습니다");
-      }
-      if (res.status === 200) {
-        const newTokenInfo = await res.json();
-        setCookie("access_token", newTokenInfo.access_token);
-        setAccessToken(newTokenInfo.access_token);
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  useEffect(() => {
-    if (!isRender) verifyToken();
-  }, []);
-
   useEffect(() => {
     if (!isRender) {
       isRender = true;
@@ -74,12 +45,15 @@ export default function StudyContent({ trackId }) {
 
   useEffect(() => {
     if (studying.isDone) {
+      console.log("========팝송 저장하고 학습 완료 모달 띄우기========");
       dispatch(savingStudyPopsong(savingData));
       dispatch(openModal("학습이 완료되었습니다. 학습 결과를 판정중입니다..."));
     }
   }, [studying.isDone, dispatch]);
 
+  // 팝송 학습 저장할 때 모달 안내
   useEffect(() => {
+    console.log("==========학습 저장 상태 모달 안내========");
     console.log(saveStatus);
     if (saveStatus === "loading") {
       dispatch(openModal("학습한 내용 저장중..."));
@@ -97,7 +71,9 @@ export default function StudyContent({ trackId }) {
     }
   }, [saveStatus, dispatch, studying.isDone, router, trackId]);
 
+  // 팝송 데이터 가져올 때 모달 안내
   useEffect(() => {
+    console.log("=========학습할 데이터 가져오기 안내 모달======");
     if (fetchStatus === "loading")
       dispatch(openModal("팝송 정보를 가져오는 중입니다..."));
     if (fetchStatus === "success") {
