@@ -1,14 +1,48 @@
 import { getCookie, setCookie } from "cookies-next";
 import { getRefresh } from "./auth";
-import { useRouter } from "next/navigation";
+import returnFetch from "return-fetch";
 
 const SERVER_URL = process.env.NEXT_PUBLIC_LOCAL_SERVER_URL;
 const INITIAL_HEADERS = {
   "Content-Type": "application/json",
 };
 const LYRICSOVH_URL = "https://api.lyrics.ovh/v1";
-const ACCESS_TOKEN = getCookie("access_token");
-const REFRESH_TOKEN = getCookie("refresh_token");
+
+// fetch 응답 후 토큰 검증을 하고 다시 fetch 반환
+export const fetchVerifyToken = (fetchArgs) =>
+  returnFetch({
+    ...fetchArgs,
+    interceptors: {
+      response: async (response, requestArgs, fetch) => {
+        // 토큰 재발급 필요
+        if (response.status !== 401) {
+          return response;
+        }
+
+        console.log("401 에러,, 토큰 재발급 필요");
+        const access_token = getCookie("access_token");
+        const refresh_token = getCookie("refresh_token");
+        const resTogetRefresh = await getRefresh(access_token, refresh_token);
+
+        if (resTogetRefresh.status === 401) throw Error(resTogetRefresh.status);
+
+        const tokenInfo = await resTogetRefresh.json();
+        setCookie("access_token", tokenInfo.access_token);
+        setCookie("refresh_token", tokenInfo.refresh_token);
+
+        return fetch(...requestArgs);
+      },
+    },
+  });
+
+// 팝송 api 요청 공통
+export const fethcPopsongExtended = fetchVerifyToken({
+  baseUrl: `${SERVER_URL}`,
+  headers: {
+    Authorization: "Bearer " + `${getCookie("access_token")}`,
+    "Content-Type": "application/json",
+  },
+});
 
 // 가사 가져오기
 export const getLyrics = async (artist, title) => {
@@ -83,66 +117,4 @@ export const compareSentence = (originSentence, sentence) => {
   }
 
   return { correct, incorrectArray };
-};
-
-// 학습한 팝송 정보 가져오기
-export const getPopsongInfo = async (trackId) => {
-  const res = await fetch(SERVER_URL + `/popsong/${trackId}`, {
-    method: "GET",
-    headers: {
-      Authorization: "Bearer " + ACCESS_TOKEN,
-    },
-  });
-
-  if (!res.ok) {
-    if (res.status === 401) throw new Error("액세스 토큰이 유효하지 않습니다");
-    else if (res.status === 400) throw new Error("학습한 적이 없는 팝송입니다");
-    else throw new Error("학습 결과를 가져오지 못했습니다");
-  }
-
-  return await res.json();
-};
-
-// 학습한 팝송 목록에 추가하기
-export const addStudyingList = async (popsongData) => {
-  console.log(popsongData);
-  const res = await fetch(SERVER_URL + "/popsong", {
-    method: "POST",
-    headers: {
-      Authorization: "Bearer " + ACCESS_TOKEN,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ ...popsongData }),
-  });
-
-  if (!res.ok) throw new Error("팝송을 저장하는데 실패하였습니다");
-
-  return await res.json();
-};
-
-// 학습한 내용 저장하기
-export const editStudyingPopsong = async (savingData) => {
-  const bodyValue = {
-    savedData: savingData.savedData,
-  };
-  if (savingData.grade && savingData.score) {
-    Object.assign(bodyValue, {
-      score: savingData.score,
-      grade: savingData.grade,
-    });
-  }
-  console.log(savingData);
-
-  const res = await fetch(SERVER_URL + `/popsong/${savingData.popsongId}`, {
-    method: "PATCH",
-    headers: {
-      Authorization: "Bearer " + ACCESS_TOKEN,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(bodyValue),
-  });
-
-  if (!res.ok) throw new Error("팝송을 저장하는데 실패하였습니다");
-
-  return await res.json();
 };
