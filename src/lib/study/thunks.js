@@ -1,11 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import {
-  addStudyingList,
-  getPopsongInfo,
-  editStudyingPopsong,
-  fethcPopsongExtended,
-} from "../play";
-import { studyActions } from "./studySlice";
+import { fethcPopsongExtended } from "../play";
 
 // 팝송 데이터 가져오기
 // return-fetch 적용
@@ -15,10 +9,11 @@ export const fetchPopsongById = createAsyncThunk(
     // 비동기 payloadCreator 함수 정의
     try {
       const res = await fethcPopsongExtended(`/api/popsong/${trackId}`);
-      if (!res.ok) throw Error(res.status);
+      if (!res.ok) {
+        throw Error(res.status);
+      }
       return await res.json();
     } catch (e) {
-      console.log(e);
       return rejectWithValue(e.message);
     }
   }
