@@ -39,13 +39,15 @@ export default function StartStudy({ styles, cardInfo, lyrics, trackId }) {
     }
   };
 
-  return (
-    <button onClick={handleStartStudy} className={styles["study-btn"]}>
-      {result.grade === "-"
-        ? isStudy
-          ? "이어서 학습하기"
-          : "첫 학습시작하기"
-        : "처음부터 학습하기"}
-    </button>
-  );
+  if (lyrics.length > 0 || isStudy) {
+    return (
+      <button onClick={handleStartStudy} className={styles["study-btn"]}>
+        {result.grade === "-"
+          ? isStudy
+            ? "이어서 학습하기"
+            : "첫 학습시작하기"
+          : "처음부터 학습하기"}
+      </button>
+    );
+  } else null;
 }
