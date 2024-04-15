@@ -1,6 +1,6 @@
 .popsong-section {
   width: 100%;
-  padding-top: 100px;
+  padding-top: 150px;
 }
 
 .popsong-wrapper {
@@ -12,7 +12,8 @@
   display: flex;
   margin: 0 auto;
   justify-content: center;
-  gap: 30px;
+  align-items: center;
+  gap: 100px;
 }
 
 .popsong-result {
@@ -28,10 +29,36 @@
 }
 
 .result-grade {
+  position: absolute;
+  right: -50px;
+  top: -50px;
+
+  width: 150px;
+  height: 150px;
+  border-radius: 100%;
+  background-color: rgb(64, 42, 42);
+
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+
+.result-info {
+  font-size: 1.25rem;
+}
+
+.result {
   font-size: 2.5rem;
 }
 
 .study-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
   background-color: var(--green);
   border: 1px solid #636363;
   box-shadow: 4px 4px 2px #777777;
@@ -39,7 +66,8 @@
   color: white;
   font-size: 1.25rem;
 
-  width: 137px;
+  /* width: 137px; */
+  padding: 0 10px;
   height: 60px;
   border-radius: 10px;
   cursor: pointer;
