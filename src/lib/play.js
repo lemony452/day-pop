@@ -24,13 +24,24 @@ export const fetchVerifyToken = (fetchArgs) =>
         const refresh_token = getCookie("refresh_token");
         const resTogetRefresh = await getRefresh(access_token, refresh_token);
 
+        console.log("토큰 재발급 : ", resTogetRefresh);
+
         if (resTogetRefresh.status === 401) throw Error(resTogetRefresh.status);
 
-        const tokenInfo = await resTogetRefresh.json();
-        setCookie("access_token", tokenInfo.access_token);
-        setCookie("refresh_token", tokenInfo.refresh_token);
+        if (resTogetRefresh.status === 200) {
+          const tokenInfo = await resTogetRefresh.json();
+          console.log(tokenInfo);
+          setCookie("access_token", tokenInfo.access_token);
+          setCookie("refresh_token", tokenInfo.refresh_token);
 
-        return fetch(...requestArgs);
+          console.log(requestArgs); // [URL, {}]
+          return fetch(requestArgs[0], {
+            headers: {
+              Authorization: "Bearer " + `${tokenInfo.access_token}`,
+              "Content-Type": "application/json",
+            },
+          });
+        }
       },
     },
   });
