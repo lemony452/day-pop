@@ -9,8 +9,9 @@ const { createSlice, current } = require("@reduxjs/toolkit");
 const { compareSentence } = require("../play");
 
 const initialStudyState = {
-  fetchStatus: "initial",
-  saveStatus: "initial",
+  fetchStatus: "initial", // 팝송 가져오기 상태
+  newStatus: "initial", // 새로운 팝송 등록 상태
+  saveStatus: "initial", // 팝송 학습 저장 상태
   isStudy: false, // 학습한적이 있는지 여부
   popsongInfo: {
     title: "",
@@ -139,6 +140,7 @@ const StudySlice = createSlice({
       }
     });
     builder.addCase(fetchPopsongById.rejected, (state, action) => {
+      console.log(action.payload);
       state.fetchStatus = "error";
       state.isStudy = false;
       state.result.grade = "-";
@@ -148,16 +150,16 @@ const StudySlice = createSlice({
     });
     // 첫 학습할 팝송 데이터 저장하기
     builder.addCase(addStudyPopsong.pending, (state) => {
-      state.saveStatus = "loading";
+      state.newStatus = "loading";
     });
     builder.addCase(addStudyPopsong.fulfilled, (state, action) => {
-      state.saveStatus = "success";
+      state.newStatus = "success";
       const { popsongId, message } = action.payload;
       state.popsongInfo.popsongId = popsongId;
       console.log(popsongId, message);
     });
     builder.addCase(addStudyPopsong.rejected, (state) => {
-      state.saveStatus = "error";
+      state.newStatus = "error";
     });
     // 학습한 내용 저장하기
     builder.addCase(savingStudyPopsong.pending, (state) => {
