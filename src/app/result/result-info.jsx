@@ -9,7 +9,7 @@ import Card from "@/components/card";
 let isRender = false;
 
 export default function ResultInfo({ cardInfo, trackId, styles }) {
-  const { studying, result } = useAppSelector((state) => state.study);
+  const { studying, result, isStudy } = useAppSelector((state) => state.study);
   const dispatch = useAppDispatch();
   console.log(studying, result);
 
@@ -22,23 +22,24 @@ export default function ResultInfo({ cardInfo, trackId, styles }) {
   return (
     <div className={styles["result-wrapper"]}>
       <div className={`${styles["result-info"]} ${fat.variable}`}>
-        <div className={styles["result-header"]}>학습 결과</div>
-        <div className={styles["result-detail"]}>
-          <Card imgSize={200} cardInfo={cardInfo}></Card>
+        {/* <div className={styles["result-header"]}>학습 결과</div> */}
+        {/* <div className={styles["result-detail"]}> */}
+        <Card imgSize={400} cardInfo={cardInfo}>
           <div className={styles.rating}>
             <ul>
-              <li>Perfect {studying.perfect}</li>
-              <li>Great {studying.great}</li>
-              <li>Good {studying.good}</li>
-              <li>Bad {studying.bad}</li>
-              <li>Miss {studying.miss}</li>
+              <li className="perfect">Perfect {studying.perfect}</li>
+              <li className="great">Great {studying.great}</li>
+              <li className="good">Good {studying.good}</li>
+              <li className="bad">Bad {studying.bad}</li>
+              <li className="miss">Miss {studying.miss}</li>
             </ul>
-            <div className={styles.rank}>
-              Rank
-              <p>{result.grade}</p>
-            </div>
           </div>
-        </div>
+          <div className={styles["result-grade"]}>
+            <div className={styles["result-info"]}>Rank</div>
+            <div className={styles["result"]}>{result.grade}</div>
+          </div>
+        </Card>
+        {/* </div> */}
       </div>
       <div className={styles["result-lyrics"]}>
         {studying.studyingLyrics?.map((sentence, idx) => (

@@ -42,19 +42,18 @@ export default async function PopsongPage({ searchParams }) {
     <section className={styles["popsong-section"]}>
       <div className={styles["popsong-wrapper"]}>
         <div className={styles["popsong-contents"]}>
-          <Card imgSize={250} cardInfo={cardInfo} />
-          <div className={`${styles["popsong-result"]} ${fat.variable}`}>
-            <div className={styles["result-header"]}>Result</div>
+          <Card imgSize={400} cardInfo={cardInfo}>
             <Result styles={styles} trackId={trackId}></Result>
             <StartStudy
               styles={styles}
               cardInfo={cardInfo}
               lyrics={lyrics}
               trackId={trackId}
-            >
-              학습하기
-            </StartStudy>
-          </div>
+            ></StartStudy>
+            {/* <div className={`${styles["popsong-result"]} ${fat.variable}`}>
+              <div className={styles["result-header"]}>Result</div>
+            </div> */}
+          </Card>
           <div className={styles["popsong-lyrics"]}>
             {lyrics.length > 0
               ? lyrics.map((sentence, idx) => <p key={idx}>{sentence}</p>)
