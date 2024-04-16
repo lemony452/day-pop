@@ -5,7 +5,7 @@ const PopsongSchema = new Schema({
   userId: String,
   title: String,
   artist: String,
-  date: { type: Date, default: new Date() },
+  date: { type: Date, default: Date.now },
   originalLyrics: [String],
   trackId: String,
   grade: { type: String, default: "-" },
