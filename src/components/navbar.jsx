@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { usePathname } from "next/navigation";
 import { savingStudyPopsong } from "@/lib/study/thunks";
 import { userActions } from "@/lib/user/userSlice";
+import { fetchUserInfo } from "@/lib/user/thunks";
 
 export default function Nav() {
   const pathName = usePathname();
@@ -33,6 +34,7 @@ export default function Nav() {
   };
 
   const handleOpenMypage = () => {
+    dispatch(fetchUserInfo("user"));
     dispatch(userActions.openMypage());
   };
 
