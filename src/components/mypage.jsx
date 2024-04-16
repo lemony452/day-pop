@@ -8,7 +8,9 @@ import Image from "next/image";
 
 export default function MyPage() {
   const dispatch = useAppDispatch();
-  const { isMypage } = useAppSelector((state) => state.user);
+  const { isMypage, totalPopsongs, history, nickname, result } = useAppSelector(
+    (state) => state.user
+  );
 
   const handleCloseMypage = () => {
     dispatch(userActions.openMypage());
@@ -33,11 +35,11 @@ export default function MyPage() {
       </div>
       <div className={styles["user-info"]}>
         <div className={styles.nickname}>
-          <span>김학습</span>
+          <span>{nickname}</span>
           <span>님</span>
         </div>
         <div className={styles.total}>
-          총 <span>23</span> 개의 팝송을 학습했어요
+          총 <span>{totalPopsongs}</span> 개의 팝송을 학습했어요
         </div>
       </div>
       <div className={styles.rank}>
@@ -50,7 +52,7 @@ export default function MyPage() {
           ></Image>{" "}
           평균 랭크
         </span>
-        <span>A</span>
+        <span id={result.grade}>{result.grade}</span>
       </div>
       <div className={styles.history}>
         <span>
@@ -63,9 +65,11 @@ export default function MyPage() {
           최근 학습한 팝송
         </span>
         <ul>
-          <li>Title - Artist</li>
-          <li>Title - Artist</li>
-          <li>Title - Artist</li>
+          {history.map((popsong) => (
+            <li key={popsong.title}>
+              {popsong.title} - {popsong.artist}
+            </li>
+          ))}
         </ul>
       </div>
       <div className={styles.logout}>로그아웃</div>
