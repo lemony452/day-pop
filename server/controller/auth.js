@@ -77,4 +77,32 @@ module.exports = {
     const newAccessToken = sign(decoded.id);
     res.status(200).json({ access_token: newAccessToken, refresh_token });
   },
+  getUserInfo: async (req, res) => {
+    const userId = req.userId;
+    const foundUser = await User.findById(userId).populate({
+      path: "studyingList",
+      select: ["title", "artist"],
+      options: {
+        sort: { date: -1 },
+      },
+    });
+
+    const totalPopsongs = foundUser.studyingList.length;
+    const history =
+      totalPopsongs < 6
+        ? [...foundUser.studyingList]
+        : foundUser.studyingList.slice(0, 5);
+
+    if (foundUser) {
+      return res
+        .status(200)
+        .json({
+          totalPopsongs,
+          grade: foundUser.grade,
+          history,
+          nickname: foundUser.nickname,
+        });
+    }
+    res.status(500).json("유저 정보를 찾는데 실패하였습니다");
+  },
 };
