@@ -48,6 +48,7 @@
   justify-content: space-between;
 
   line-height: 60px;
+  letter-spacing: 0.2rem;
   border-bottom: 1px solid #fff;
 }
 
@@ -81,13 +82,14 @@
   font-size: 4rem;
   margin-left: 40px;
   font-family: var(--font-fat);
-  color: red;
+  color: #fff;
 
   -webkit-text-stroke: 1px #636363;
   text-shadow: 4px 4px 2px #b1b1b1;
 }
 
 .history {
+  width: 100%;
   font-size: 1.25rem;
 }
 
@@ -101,11 +103,15 @@
 
 .history ul {
   margin-left: 40px;
+  overflow: scroll;
+  white-space: nowrap;
 }
 
 .history li {
+  font-size: 1rem;
   list-style: none;
-  line-height: 50px;
+  line-height: 40px;
+  color: var(--gray);
 }
 
 .logout {
