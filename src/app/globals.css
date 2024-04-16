@@ -16,7 +16,7 @@
   --B: #78ff57;
   --C: #2e5ff1;
   --D: #180def;
-  --F: gray;
+  --F: rgb(255, 80, 229);
 
   --logo: 24px;
   --primary-size: 16px;
@@ -59,6 +59,28 @@ main {
 }
 .miss {
   color: var(--miss);
+}
+
+#S {
+  color: var(--S);
+}
+#Ap {
+  color: var(--Ap);
+}
+#A {
+  color: var(--A);
+}
+#B {
+  color: var(--B);
+}
+#C {
+  color: var(--C);
+}
+#D {
+  color: var(--D);
+}
+#F {
+  color: var(--F);
 }
 
 dialog {
