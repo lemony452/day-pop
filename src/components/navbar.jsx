@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { usePathname } from "next/navigation";
 import { savingStudyPopsong } from "@/lib/study/thunks";
+import { userActions } from "@/lib/user/userSlice";
 
 export default function Nav() {
   const pathName = usePathname();
@@ -31,9 +32,13 @@ export default function Nav() {
     dispatch(savingStudyPopsong(savingData));
   };
 
+  const handleOpenMypage = () => {
+    dispatch(userActions.openMypage());
+  };
+
   return (
     <div className={styles["nav-items"]}>
-      {pathName !== "/study" && (
+      {pathName !== "/study" && pathName !== "/myplaylist" && (
         <>
           <Link href="/myplaylist">
             <Button className={`${styles.button} ${styles.toMain}`}>
@@ -50,9 +55,9 @@ export default function Nav() {
           학습 종료
         </button>
       )}
-      <Button className={styles.menu}>
+      <button onClick={handleOpenMypage} className={styles.menu}>
         <Image src="/menu.png" alt="sidebar menu" width={30} height={30} />
-      </Button>
+      </button>
     </div>
   );
 }
