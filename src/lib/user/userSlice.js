@@ -8,6 +8,7 @@ const initialUserState = {
   isLogin: false,
   isStudy: false,
   studyList: [],
+  isMypage: false,
   result: {
     grade: "-",
     score: 0,
@@ -23,6 +24,9 @@ export const UserSlice = createSlice({
     },
     logout(state) {
       state.isLogin = false;
+    },
+    openMypage(state) {
+      state.isMypage = !state.isMypage;
     },
   },
   extraReducers(builder) {
