@@ -4,7 +4,8 @@ const {
   spotifyLogin,
   getRefreshToken,
 } = require("../controller/spotifyAuth");
-const { login, signup, refresh } = require("../controller/auth");
+const { login, signup, refresh, getUserInfo } = require("../controller/auth");
+const authJWT = require("../utils/middleware");
 
 const router = express.Router();
 
@@ -19,5 +20,7 @@ router.route("/login").post(login);
 router.route("/signup").post(signup);
 
 router.route("/refresh").post(refresh);
+
+router.route("/user").get(authJWT, getUserInfo);
 
 module.exports = router;
