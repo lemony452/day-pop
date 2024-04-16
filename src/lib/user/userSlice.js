@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { verifyToken } from "./thunks";
+import { fetchUserInfo } from "./thunks";
 
 const initialUserState = {
   verifyStatus: "initial",
@@ -7,7 +7,9 @@ const initialUserState = {
   refresh_token: "",
   isLogin: false,
   isStudy: false,
-  studyList: [],
+  history: [],
+  nickname: "",
+  totalPopsongs: 0,
   isMypage: false,
   result: {
     grade: "-",
@@ -30,19 +32,23 @@ export const UserSlice = createSlice({
     },
   },
   extraReducers(builder) {
-    builder.addCase(verifyToken.pending, (state) => {
+    builder.addCase(fetchUserInfo.pending, (state) => {
       state.verifyStatus = "loading";
     });
-    builder.addCase(verifyToken.fulfilled, (state, action) => {
+    builder.addCase(fetchUserInfo.fulfilled, (state, action) => {
       state.verifyStatus = "success";
       if (action.payload) {
-        state.access_token = action.payload.access_token;
-        state.refresh_token = action.payload.refresh_token;
+        console.log(action.payload);
+        const userInfo = action.payload;
+        state.result.grade = userInfo.grade;
+        state.history = userInfo.history;
+        state.nickname = userInfo.nickname;
+        state.totalPopsongs = userInfo.totalPopsongs;
       }
     });
-    builder.addCase(verifyToken.rejected, (state, action) => {
+    builder.addCase(fetchUserInfo.rejected, (state, action) => {
+      state.verifyStatus = "error";
       console.log(action.payload);
-      state.isLogin = false;
     });
   },
 });
