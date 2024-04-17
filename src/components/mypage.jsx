@@ -5,8 +5,11 @@ import styles from "./mypage.module.css";
 import { userActions } from "@/lib/user/userSlice";
 import { fat } from "@/app/layout";
 import Image from "next/image";
+import { deleteCookie } from "cookies-next";
+import { useRouter } from "next/navigation";
 
 export default function MyPage() {
+  const router = useRouter();
   const dispatch = useAppDispatch();
   const { isMypage, totalPopsongs, history, nickname, result } = useAppSelector(
     (state) => state.user
@@ -14,6 +17,13 @@ export default function MyPage() {
 
   const handleCloseMypage = () => {
     dispatch(userActions.openMypage());
+  };
+
+  const handleLogout = () => {
+    dispatch(userActions.logout());
+    dispatch(userActions.openMypage());
+    deleteCookie("access_token");
+    router.push("/login");
   };
 
   return (
@@ -72,7 +82,9 @@ export default function MyPage() {
           ))}
         </ul>
       </div>
-      <div className={styles.logout}>로그아웃</div>
+      <div onClick={handleLogout} className={styles.logout}>
+        로그아웃
+      </div>
     </div>
   );
 }
