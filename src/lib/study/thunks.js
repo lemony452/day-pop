@@ -27,10 +27,12 @@ export const fetchPopsongById = createAsyncThunk(
 export const addStudyPopsong = createAsyncThunk(
   "study/addPopsongStatus",
   async (popsongData, { rejectWithValue }) => {
+    const token = getCookie("access_token");
     try {
       const res = await fethcPopsongExtended("/api/popsong", {
         method: "POST",
         body: JSON.stringify(popsongData),
+        headers: { Authorization: "Bearer " + token },
       });
       if (!res.ok) throw Error(res.status);
       return await res.json();
@@ -45,6 +47,7 @@ export const addStudyPopsong = createAsyncThunk(
 export const savingStudyPopsong = createAsyncThunk(
   "study/savingPopsongStatus",
   async (savingData, { rejectWithValue }) => {
+    const token = getCookie("access_token");
     const bodyValue = {
       savedData: savingData.savedData,
     };
@@ -60,6 +63,7 @@ export const savingStudyPopsong = createAsyncThunk(
         {
           method: "PATCH",
           body: JSON.stringify(bodyValue),
+          headers: { Authorization: "Bearer " + token },
         }
       );
       if (!res.ok) throw Error(res.status);
