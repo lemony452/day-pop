@@ -1,16 +1,8 @@
 "use client";
 
-import { getRefresh } from "@/lib/auth";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
-import { studyActions } from "@/lib/study/studySlice";
 import { addStudyPopsong } from "@/lib/study/thunks";
-import { getCookie, setCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-
-let isRender = false;
-const ACCESS_TOKEN = getCookie("access_token");
-const REFRESH_TOKEN = getCookie("refresh_token");
 
 export default function StartStudy({ styles, cardInfo, lyrics, trackId }) {
   // const [accessToken, setAccessToken] = useState(ACCESS_TOKEN);
@@ -27,9 +19,6 @@ export default function StartStudy({ styles, cardInfo, lyrics, trackId }) {
   };
 
   const handleStartStudy = () => {
-    console.log("==========학습하기===========");
-    console.log(popsongInfo);
-
     if (!popsongInfo.originalLyrics.length && !lyrics.length) {
       alert("해당 곡은 학습을 할 수 없습니다");
     } else {

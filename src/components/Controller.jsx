@@ -40,7 +40,7 @@ export default function Controller({
         if (!state) {
           return;
         }
-        console.log("state : ", state);
+        // console.log("state : ", state);
         // setTrack(() => state.track_window.current_track); // 현재 트랙 정보 가져옴
         setPaused(state.paused); // 정지 또는 플레이
         setPosition(state.position); // 재생 시간 ms

@@ -4,8 +4,6 @@ import { useAppSelector, useAppDispatch } from "@/lib/hooks";
 import { fetchPopsongById } from "@/lib/study/thunks";
 import { useEffect } from "react";
 
-let isRender = false;
-
 export default function Result({ styles, trackId }) {
   const dispatch = useAppDispatch();
   const { isStudy, result, studying, popsongInfo } = useAppSelector(
@@ -16,12 +14,7 @@ export default function Result({ styles, trackId }) {
   );
 
   useEffect(() => {
-    if (!isRender) {
-      isRender = true;
-    } else {
-      console.log("팝송 정보 가져오기");
-      dispatch(fetchPopsongById(trackId));
-    }
+    dispatch(fetchPopsongById(trackId));
   }, [trackId, dispatch]);
 
   return (

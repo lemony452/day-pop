@@ -10,8 +10,6 @@ import { fetchPopsongById, savingStudyPopsong } from "@/lib/study/thunks";
 import { closeModal, openModal } from "@/lib/modal/modalSlice";
 import { studyActions } from "@/lib/study/studySlice";
 
-let isRender = false;
-
 export default function StudyContent({ trackId }) {
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -36,10 +34,6 @@ export default function StudyContent({ trackId }) {
   };
 
   useEffect(() => {
-    if (!isRender) {
-      isRender = true;
-      return;
-    }
     dispatch(fetchPopsongById(trackId));
   }, [dispatch, trackId]);
 

@@ -8,8 +8,6 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { useEffect } from "react";
 import Loading from "../dashboard/loading";
 
-let isRender = false;
-
 export default function CallbackPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -31,10 +29,8 @@ export default function CallbackPage() {
         else router.push(`/signup?spotifyId=${userInfo.id}`);
       }
     };
-    if (isRender) {
-      getToken(code, state);
-    }
-    if (!isRender) isRender = true;
+
+    getToken(code, state);
   }, [code, router, state]);
 
   return <Loading></Loading>;
