@@ -38,7 +38,6 @@ export const UserSlice = createSlice({
     builder.addCase(fetchUserInfo.fulfilled, (state, action) => {
       state.verifyStatus = "success";
       if (action.payload) {
-        console.log(action.payload);
         const userInfo = action.payload;
         state.result.grade = userInfo.grade;
         state.history = userInfo.history;
@@ -48,7 +47,6 @@ export const UserSlice = createSlice({
     });
     builder.addCase(fetchUserInfo.rejected, (state, action) => {
       state.verifyStatus = "error";
-      console.log(action.payload);
     });
   },
 });

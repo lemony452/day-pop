@@ -2,7 +2,6 @@ import Image from "next/image";
 import styles from "./page.module.css";
 
 export default function MyPlaylistItem({ trackInfo }) {
-  // console.log("트랙 상세 정보 : ", trackInfo);
   const duration = Math.ceil(trackInfo.track.duration_ms / 1000); // ms -> s
   const minute = parseInt(duration / 60);
   let seconds = duration % 60;

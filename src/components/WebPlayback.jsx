@@ -22,7 +22,6 @@ export default function WebPlayback({ access_token, cardInfo }) {
 
       document.body.appendChild(script);
       window.onSpotifyWebPlaybackSDKReady = () => {
-        console.log("============");
         const player = new window.Spotify.Player({
           name: "Web Playback SDK",
           getOAuthToken: (cb) => {
@@ -31,7 +30,6 @@ export default function WebPlayback({ access_token, cardInfo }) {
           },
           volume: 0.5,
         });
-        // console.log("player : ", player);
 
         player.addListener("ready", async ({ device_id }) => {
           console.log("Ready with Device ID", device_id);
@@ -61,7 +59,6 @@ export default function WebPlayback({ access_token, cardInfo }) {
   useEffect(() => {
     if (player) {
       return () => {
-        console.log("$$$$$$$", player);
         if (player) {
           player.removeListener("ready");
           player.disconnect();

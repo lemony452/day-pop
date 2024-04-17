@@ -11,7 +11,6 @@ export default function Modal() {
   const dispatch = useAppDispatch();
   const { isOpen, content } = useAppSelector((state) => state.modal);
 
-  console.log(isOpen, content);
   if (isOpen) dialogRef.current?.showModal();
   else dialogRef.current?.close();
 

@@ -1,16 +1,12 @@
-import { getRefresh, getSpotifyRefresh } from "@/lib/auth";
-import { getPlayState, transferPlayer } from "@/lib/play";
-import { getCookies, setCookie } from "cookies-next";
+import { getSpotifyRefresh } from "@/lib/auth";
 import { NextResponse } from "next/server";
 
 export async function middleware(request) {
   const url = request.nextUrl.origin;
-  // console.log(request.nextUrl);
+
   let spotify_access_token;
-  console.log("cookies-next : ", getCookies());
   const { cookies } = request;
   const response = NextResponse.next();
-  console.log("쿠키들: ", cookies.getAll());
 
   const access_token = cookies.get("access_token")?.value;
   const refresh_token = cookies.get("refresh_token")?.value;

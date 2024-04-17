@@ -6,18 +6,11 @@ module.exports = {
   getPopsong: async (req, res) => {
     const userId = req.userId;
     const { trackId } = req.params;
-    console.log("유저 id : ", userId);
-    console.log("트랙 id : ", trackId);
-
-    // const studyingList = await User.findById(userId).populate("studyingList");
-    // console.log("내가 학습한 팝송들 : ", studyingList);
 
     const foundPopsong = await Popsong.findOne({ trackId, userId });
 
-    console.log("찾으려는 팝송 : ", foundPopsong);
     if (foundPopsong) res.status(200).json(foundPopsong);
     else res.status(400).json("학습한 적이 없는 팝송입니다");
-    // throw new AppError(400, "학습한 적이 없는 팝송입니다");
   },
   addStudyingPopsong: async (req, res) => {
     const userId = req.userId;
@@ -38,8 +31,6 @@ module.exports = {
   editStudyingPopsong: async (req, res) => {
     const userId = req.userId;
     const { popsongId } = req.params;
-    console.log(popsongId);
-    console.log(req.body);
     const reqData = req.body;
 
     if (reqData.score && reqData.grade) {

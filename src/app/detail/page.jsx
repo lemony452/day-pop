@@ -15,7 +15,6 @@ export default async function PopsongPage({ searchParams }) {
   const tokenInfo = await getSpotifyRefresh(spotify_refresh_token.value);
 
   const trackInfo = await getTrackInfo(trackId, tokenInfo.access_token);
-  // console.log(trackInfo);
 
   const cardInfo = {
     trackTitle: trackInfo.name,

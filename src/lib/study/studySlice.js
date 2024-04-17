@@ -71,8 +71,6 @@ const StudySlice = createSlice({
       let grade = "";
       const currentIdx = state.studying.sentenceIdx;
       const originSentence = state.popsongInfo.originalLyrics[currentIdx];
-      console.log(current(state.popsongInfo));
-      console.log("=================> ", originSentence);
       // 실제 가사와 비교
       const { correct, incorrectArray } = compareSentence(
         originSentence,
@@ -123,8 +121,6 @@ const StudySlice = createSlice({
       state.fetchStatus = "success";
       state.isStudy = true;
       const data = action.payload;
-      console.log(data);
-      console.log(data.savedData);
       if (data) {
         state.popsongInfo = {
           title: data.title,
@@ -140,7 +136,6 @@ const StudySlice = createSlice({
       }
     });
     builder.addCase(fetchPopsongById.rejected, (state, action) => {
-      console.log(action.payload);
       state.fetchStatus = "error";
       state.isStudy = false;
       state.result.grade = "-";
@@ -156,7 +151,6 @@ const StudySlice = createSlice({
       state.newStatus = "success";
       const { popsongId, message } = action.payload;
       state.popsongInfo.popsongId = popsongId;
-      console.log(popsongId, message);
     });
     builder.addCase(addStudyPopsong.rejected, (state) => {
       state.newStatus = "error";
@@ -167,7 +161,6 @@ const StudySlice = createSlice({
     });
     builder.addCase(savingStudyPopsong.fulfilled, (state, action) => {
       state.saveStatus = "success";
-      console.log(action.payload);
     });
     builder.addCase(savingStudyPopsong.rejected, (state) => {
       state.saveStatus = "error";

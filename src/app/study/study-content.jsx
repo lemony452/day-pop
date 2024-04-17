@@ -16,8 +16,6 @@ export default function StudyContent({ trackId }) {
   const { studying, popsongInfo, result, fetchStatus, saveStatus } =
     useAppSelector((state) => state.study);
 
-  console.log("=======> 학습한 내용들", studying.studyingLyrics);
-
   const savingData = {
     popsongId: popsongInfo.popsongId,
     savedData: {
@@ -39,7 +37,6 @@ export default function StudyContent({ trackId }) {
 
   useEffect(() => {
     if (studying.isDone) {
-      console.log("========팝송 저장하고 학습 완료 모달 띄우기========");
       dispatch(savingStudyPopsong(savingData));
       dispatch(openModal("학습이 완료되었습니다. 학습 결과를 판정중입니다..."));
     }
@@ -47,8 +44,6 @@ export default function StudyContent({ trackId }) {
 
   // 팝송 학습 저장할 때 모달 안내
   useEffect(() => {
-    console.log("==========학습 저장 상태 모달 안내========");
-    console.log(saveStatus);
     if (saveStatus === "loading") {
       dispatch(openModal("학습한 내용 저장중..."));
     }
@@ -67,7 +62,6 @@ export default function StudyContent({ trackId }) {
 
   // 팝송 데이터 가져올 때 모달 안내
   useEffect(() => {
-    console.log("=========학습할 데이터 가져오기 안내 모달======");
     if (fetchStatus === "loading")
       dispatch(openModal("팝송 정보를 가져오는 중입니다..."));
     if (fetchStatus === "success") {

@@ -24,8 +24,6 @@ export const fetchVerifyToken = (fetchArgs) =>
         const refresh_token = getCookie("refresh_token");
         const resTogetRefresh = await getRefresh(access_token, refresh_token);
 
-        console.log("토큰 재발급 : ", resTogetRefresh);
-
         if (resTogetRefresh.status === 401) throw Error(resTogetRefresh.status);
 
         if (resTogetRefresh.status === 200) {
@@ -33,7 +31,7 @@ export const fetchVerifyToken = (fetchArgs) =>
           setCookie("access_token", tokenInfo.access_token);
           setCookie("refresh_token", tokenInfo.refresh_token);
 
-          console.log(requestArgs); // [URL, {}]
+          // console.log(requestArgs); // [URL, {}]
           return fetch(requestArgs[0], {
             headers: {
               Authorization: "Bearer " + `${tokenInfo.access_token}`,
@@ -86,7 +84,6 @@ export const transferPlayer = async (access_token, device_id) => {
 
 // 해당 트랙으로 플레이어 재생목록 설정하기
 export const onPlayTrack = async (access_token, track_uri, device_id) => {
-  console.log("트랙 : ", track_uri);
   const res = await fetch(
     `https://api.spotify.com/v1/me/player/play?device_id=${device_id}`,
     {
@@ -98,8 +95,6 @@ export const onPlayTrack = async (access_token, track_uri, device_id) => {
       body: JSON.stringify({ uris: [track_uri], position_ms: 0 }),
     }
   );
-
-  console.log(res);
 };
 
 // 트랙 정보 가져오기
@@ -115,8 +110,6 @@ export const getTrackInfo = async (trackId, access_token) => {
 
 // 원래 문장과 비교하기
 export const compareSentence = (originSentence, sentence) => {
-  console.log("원래 가사 : ", originSentence);
-  console.log("내가 쓴 가사 : ", sentence);
   let correct = 0;
   const incorrectArray = [];
   if (sentence.length > 0) {

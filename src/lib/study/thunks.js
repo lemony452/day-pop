@@ -37,7 +37,6 @@ export const addStudyPopsong = createAsyncThunk(
       if (!res.ok) throw Error(res.status);
       return await res.json();
     } catch (e) {
-      console.log(e);
       return rejectWithValue(e.message);
     }
   }
@@ -69,7 +68,6 @@ export const savingStudyPopsong = createAsyncThunk(
       if (!res.ok) throw Error(res.status);
       return await res.json();
     } catch (e) {
-      console.log(e);
       return rejectWithValue(e.message);
     }
   }
