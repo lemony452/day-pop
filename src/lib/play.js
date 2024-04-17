@@ -30,7 +30,6 @@ export const fetchVerifyToken = (fetchArgs) =>
 
         if (resTogetRefresh.status === 200) {
           const tokenInfo = await resTogetRefresh.json();
-          console.log(tokenInfo);
           setCookie("access_token", tokenInfo.access_token);
           setCookie("refresh_token", tokenInfo.refresh_token);
 
@@ -42,6 +41,8 @@ export const fetchVerifyToken = (fetchArgs) =>
             },
           });
         }
+
+        return;
       },
     },
   });
@@ -50,7 +51,6 @@ export const fetchVerifyToken = (fetchArgs) =>
 export const fethcPopsongExtended = fetchVerifyToken({
   baseUrl: `${SERVER_URL}`,
   headers: {
-    Authorization: "Bearer " + `${getCookie("access_token")}`,
     "Content-Type": "application/json",
   },
 });
