@@ -57,10 +57,10 @@ module.exports.spotifyLogin = (req, res) => {
         if (user) res.status(200).json({ tokenInfo, isSign: true, userInfo });
         else res.status(200).json({ tokenInfo, isSign: false, userInfo });
       } else {
-        res.status(500).json("액세스 토큰을 가져오는데 실패하였습니다");
+        throw new Error(500);
       }
     } catch (e) {
-      console.log(e);
+      res.status(500).json("스포티파이 로그인에 실패하였습니다");
     }
   });
 };
