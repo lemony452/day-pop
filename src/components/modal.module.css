@@ -6,7 +6,7 @@
 .content {
   font-family: var(--font-fat);
   margin: 0;
-  font-size: 5em;
+  font-size: 2em;
   padding: 0;
   color: white;
   text-shadow: 0 0.1em 20px rgba(0, 0, 0, 1), 0.05em -0.03em 0 rgba(0, 0, 0, 1),
