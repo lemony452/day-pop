@@ -6,8 +6,6 @@ import Image from "next/image";
 import styles from "./WebPlayback.module.css";
 import Controller from "./Controller";
 
-let isRender = false; // effect 초기 렌더링 체크
-
 export default function WebPlayback({ access_token, cardInfo }) {
   const [player, setPlayer] = useState(undefined);
   const [deviceId, setDeviceId] = useState();
@@ -33,7 +31,7 @@ export default function WebPlayback({ access_token, cardInfo }) {
           },
           volume: 0.5,
         });
-        console.log("player : ", player);
+        // console.log("player : ", player);
 
         player.addListener("ready", async ({ device_id }) => {
           console.log("Ready with Device ID", device_id);
@@ -57,22 +55,20 @@ export default function WebPlayback({ access_token, cardInfo }) {
       };
     };
 
-    if (!isRender) isRender = true;
-    else {
-      playbackSpotifyPlayer();
+    playbackSpotifyPlayer();
+  }, []);
+
+  useEffect(() => {
+    if (player) {
       return () => {
-        if (player)
-          return () => {
-            player.removeListener("ready");
-            player.disconnect();
-          };
+        console.log("$$$$$$$", player);
+        if (player) {
+          player.removeListener("ready");
+          player.disconnect();
+        }
       };
     }
-  }, [access_token, cardInfo.track_uri]);
-
-  // useEffect(() => {
-  //   console.log("===========> 플레이어 : ", player);
-  // }, [player]);
+  }, [player]);
 
   return (
     <>
