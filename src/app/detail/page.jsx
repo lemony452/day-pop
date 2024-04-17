@@ -1,21 +1,16 @@
 import Link from "next/link";
 import { cookies } from "next/headers";
-import { fat } from "../layout";
 import styles from "./page.module.css";
 
 import Card from "@/components/card";
-import Button from "@/components/btn";
 import { getSpotifyRefresh, getRefresh } from "@/lib/auth";
 import { getLyrics, getPopsongInfo, getTrackInfo } from "@/lib/play";
-import Search from "@/components/search";
 import StartStudy from "./start-study";
 import Result from "./result";
 
 export default async function PopsongPage({ searchParams }) {
   const { trackId } = searchParams;
   const cookiesStore = cookies();
-  const access_token = cookiesStore.get("access_token").value; // { name, value }
-  const refresh_token = cookiesStore.get("refresh_token").value;
   const spotify_refresh_token = cookiesStore.get("spotify_refresh_token");
   const tokenInfo = await getSpotifyRefresh(spotify_refresh_token.value);
 
@@ -50,9 +45,6 @@ export default async function PopsongPage({ searchParams }) {
               lyrics={lyrics}
               trackId={trackId}
             ></StartStudy>
-            {/* <div className={`${styles["popsong-result"]} ${fat.variable}`}>
-              <div className={styles["result-header"]}>Result</div>
-            </div> */}
           </Card>
           <div className={styles["popsong-lyrics"]}>
             {lyrics.length > 0
