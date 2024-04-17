@@ -8,8 +8,7 @@ import { redirect } from "next/navigation";
 export default async function Home() {
   const cookiesStore = cookies();
 
-  const access_token = cookiesStore.get("access_token");
-
+  const access_token = cookiesStore.get("access_token")?.value;
   if (access_token) redirect("/myplaylist");
 
   return (
