@@ -6,10 +6,13 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useRef } from "react";
 import { setCookie } from "cookies-next";
+import { useAppDispatch } from "@/lib/hooks";
+import { userActions } from "@/lib/user/userSlice";
 
 export default function LoginForm({ styles }) {
   const router = useRouter();
   const formRef = useRef(null);
+  const dispatch = useAppDispatch();
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -35,7 +38,8 @@ export default function LoginForm({ styles }) {
         setCookie("refresh_token", refresh_token);
         // localStorage.setItem("access_token", access_token);
         // localStorage.setItem("refresh_token", refresh_token);
-        return router.push("/playlist");
+        router.push("/myplaylist");
+        dispatch(userActions.login());
       }
     } catch (e) {
       alert("로그인에 실패하였습니다.");
