@@ -1,14 +1,18 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { fethcPopsongExtended } from "../play";
+import { getCookie } from "cookies-next";
 
 // 팝송 데이터 가져오기
 // return-fetch 적용
 export const fetchPopsongById = createAsyncThunk(
   "study/fetchPopsongStatus", // thunk 함수 이름
   async (trackId, { rejectWithValue }) => {
+    const token = getCookie("access_token");
     // 비동기 payloadCreator 함수 정의
     try {
-      const res = await fethcPopsongExtended(`/api/popsong/${trackId}`);
+      const res = await fethcPopsongExtended(`/api/popsong/${trackId}`, {
+        headers: { Authorization: "Bearer " + token },
+      });
       if (!res.ok) {
         throw Error(res.status);
       }

@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { getRefresh } from "../auth";
 import { fethcPopsongExtended } from "../play";
+import { getCookie } from "cookies-next";
 
 // 토큰 유효한지 검증하기
 export const verifyToken = createAsyncThunk(
@@ -23,8 +24,11 @@ export const verifyToken = createAsyncThunk(
 export const fetchUserInfo = createAsyncThunk(
   "user/fetchUserInfoStatus",
   async (user, { rejectWithValue }) => {
+    const token = getCookie("access_token");
     try {
-      const res = await fethcPopsongExtended("/api/user");
+      const res = await fethcPopsongExtended("/api/user", {
+        headers: { Authorization: "Bearer " + token },
+      });
       if (!res.ok) throw Error(res.status);
       return await res.json();
     } catch (e) {
