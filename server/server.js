@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
 
-const LOCAL_MONGODB_URL = "mongodb://127.0.0.1:27017/day-pop";
-const MONGODB_URL = process.env.MONGODB_URL;
+const LOCAL_MONGODB_URI = process.env.LOCAL_MONGODB_URI;
+const MONGODB_URI = process.env.MONGODB_URI;
 
 const connectServer = () => {
   mongoose
-    .connect(MONGODB_URL)
+    .connect(MONGODB_URI)
     .then(() => {
       console.log("Mongoose Connected");
     })
