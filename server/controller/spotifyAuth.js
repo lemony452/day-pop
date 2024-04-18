@@ -3,9 +3,9 @@ const querystring = require("querystring");
 const { generateRandomString } = require("../utils/utils");
 const User = require("../models/user");
 
-const client_id = process.env.client_id;
-const redirect_uri = "http://localhost:3000/callback";
-const client_secret = process.env.client_secret;
+const CLIENT_ID = process.env.CLIENT_ID;
+const REDIRECT_URI = process.env.REDIRECT_URI;
+const CLIENT_SECRET = process.env.CLIENT_SECRET;
 
 // 인가코드를 요청할 주소 url 가져오기
 module.exports.getCode = (req, res) => {
@@ -18,9 +18,9 @@ module.exports.getCode = (req, res) => {
     "https://accounts.spotify.com/authorize?" +
       querystring.stringify({
         response_type: "code",
-        client_id: client_id,
+        client_id: CLIENT_ID,
         scope: scope,
-        redirect_uri: redirect_uri,
+        redirect_uri: REDIRECT_URI,
         state: state,
       })
   );
@@ -38,7 +38,7 @@ module.exports.spotifyLogin = (req, res) => {
       "content-type": "application/x-www-form-urlencoded",
       Authorization:
         "Basic " +
-        new Buffer.from(client_id + ":" + client_secret).toString("base64"),
+        new Buffer.from(CLIENT_ID + ":" + CLIENT_SECRET).toString("base64"),
     },
     form: {
       code: code,
@@ -73,9 +73,7 @@ module.exports.getRefreshToken = (req, res) => {
       "content-type": "application/x-www-form-urlencoded",
       Authorization:
         "Basic " +
-        new Buffer.from(
-          process.env.client_id + ":" + process.env.client_secret
-        ).toString("base64"),
+        new Buffer.from(CLIENT_ID + ":" + CLIENT_SECRET).toString("base64"),
     },
     form: {
       grant_type: "refresh_token",
