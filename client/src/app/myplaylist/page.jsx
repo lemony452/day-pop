@@ -4,7 +4,7 @@ import styles from "./page.module.css";
 import { getSpotifyRefresh } from "@/lib/auth";
 import Link from "next/link";
 
-export const HEADERS = (access_token) => {
+const HEADERS = (access_token) => {
   return {
     Authorization: "Bearer " + access_token,
   };
