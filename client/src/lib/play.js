@@ -2,7 +2,7 @@ import { getCookie, setCookie } from "cookies-next";
 import { getRefresh } from "./auth";
 import returnFetch from "return-fetch";
 
-const SERVER_URL = process.env.NEXT_PUBLIC_LOCAL_SERVER_URL;
+const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL;
 const INITIAL_HEADERS = {
   "Content-Type": "application/json",
 };
