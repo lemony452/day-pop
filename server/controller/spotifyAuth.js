@@ -42,7 +42,7 @@ module.exports.spotifyLogin = (req, res) => {
     },
     form: {
       code: code,
-      redirect_uri: redirect_uri,
+      redirect_uri: REDIRECT_URI,
       grant_type: "authorization_code",
     },
     json: true,
