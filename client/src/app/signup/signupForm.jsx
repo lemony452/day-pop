@@ -3,13 +3,13 @@
 import Button from "@/components/btn";
 import { signup } from "@/lib/auth";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useRef } from "react";
 import { setCookie } from "cookies-next";
 
-export default function SignupForm({ styles }) {
-  const searchParams = useSearchParams();
-  const spotifyId = searchParams.get("spotifyId");
+export default function SignupForm({ styles, spotifyId }) {
+  // const searchParams = useSearchParams();
+  // const spotifyId = searchParams.get("spotifyId");
   const router = useRouter();
   const formRef = useRef(null);
 
