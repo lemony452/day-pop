@@ -13,10 +13,16 @@ const cors = require("cors");
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(__dirname + "/client"));
 
 // routing path setting
 app.use("/api", userRouter);
 app.use("/api/popsong", playRouter);
+
+// nextjs에서 라우트 처리를 하도록 설정
+app.get("*", (req, res) => {
+  res.sendFile(__dirname + "/client/index.html");
+});
 
 // 오류 처리 미들웨어
 app.use((err, req, res, next) => {
