@@ -9,7 +9,8 @@ const userRouter = require("./routes/users");
 const playRouter = require("./routes/play");
 const cors = require("cors");
 const corsOptions = {
-  origin: "https://day-py5iyxerb-lemony452s-projects.vercel.app/",
+  origin: "https://day-py5iyxerb-lemony452s-projects.vercel.app",
+  credential: true,
 };
 
 // express using
