@@ -8,9 +8,12 @@ connectServer();
 const userRouter = require("./routes/users");
 const playRouter = require("./routes/play");
 const cors = require("cors");
+const corsOptions = {
+  origin: "https://day-py5iyxerb-lemony452s-projects.vercel.app/",
+};
 
 // express using
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // app.use(express.static(__dirname + "/client"));
