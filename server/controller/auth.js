@@ -94,14 +94,12 @@ module.exports = {
         : foundUser.studyingList.slice(0, 5);
 
     if (foundUser) {
-      return res
-        .status(200)
-        .json({
-          totalPopsongs,
-          grade: foundUser.grade,
-          history,
-          nickname: foundUser.nickname,
-        });
+      return res.status(200).json({
+        totalPopsongs,
+        grade: foundUser.grade,
+        history,
+        nickname: foundUser.nickname,
+      });
     }
     res.status(500).json("유저 정보를 찾는데 실패하였습니다");
   },
