@@ -9,8 +9,8 @@ module.exports = {
 
     const foundPopsong = await Popsong.findOne({ trackId, userId });
 
-    if (foundPopsong) res.status(200).json(foundPopsong);
-    else res.status(400).json("학습한 적이 없는 팝송입니다");
+    if (foundPopsong) return res.status(200).json(foundPopsong);
+    throw new AppError(400, "학습한 적이 없는 팝송입니다");
   },
   addStudyingPopsong: async (req, res) => {
     const userId = req.userId;
@@ -58,6 +58,6 @@ module.exports = {
       new: true,
     });
     if (updatePopsong) return res.status(200).json("성공적으로 저장하였습니다");
-    res.status(500).json("저장에 실패하였습니다");
+    throw new AppError(500, "저장에 실패하였습니다");
   },
 };
