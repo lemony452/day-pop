@@ -1,7 +1,6 @@
 const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL;
 const INITIAL_HEADERS = {
   "Content-Type": "application/json",
-  credentials: "include",
 };
 
 // ----- 스포티파이 로그인 ------ //
@@ -58,7 +57,6 @@ export const getRefresh = async (access_token, refresh_token) => {
     headers: {
       Authorizaiton: "Bearer " + access_token,
       refreshtoken: refresh_token,
-      credentials: "include",
     },
   });
 

@@ -10,7 +10,6 @@ const playRouter = require("./routes/play");
 const cors = require("cors");
 const corsOptions = {
   origin: process.env.CLIENT_DOMAIN,
-  credential: true,
 };
 
 // express using
