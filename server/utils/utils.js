@@ -5,7 +5,7 @@ const generateRandomString = (length) => {
   return crypto.randomBytes(60).toString("hex").slice(0, length);
 };
 
-const saltRounds = 10;
+const saltRounds = 5;
 
 const getHash = (value) => {
   return bcrypt.hashSync(value, saltRounds);
