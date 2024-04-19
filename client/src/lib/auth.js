@@ -1,6 +1,7 @@
 const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL;
 const INITIAL_HEADERS = {
   "Content-Type": "application/json",
+  credentials: "include",
 };
 
 // ----- 스포티파이 로그인 ------ //
@@ -18,7 +19,10 @@ export const getSpotifyRefresh = async (refresh_token) => {
 
 export const loginWithSpotify = async (code, state) => {
   const res = await fetch(
-    `${SERVER_URL}/spotify/login?code=${code}&state=${state}`
+    `${SERVER_URL}/spotify/login?code=${code}&state=${state}`,
+    {
+      headers: INITIAL_HEADERS,
+    }
   );
   return await res.json();
 };
@@ -54,6 +58,7 @@ export const getRefresh = async (access_token, refresh_token) => {
     headers: {
       Authorizaiton: "Bearer " + access_token,
       refreshtoken: refresh_token,
+      credentials: "include",
     },
   });
 

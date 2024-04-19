@@ -36,6 +36,7 @@ export const fetchVerifyToken = (fetchArgs) =>
             headers: {
               Authorization: "Bearer " + `${tokenInfo.access_token}`,
               "Content-Type": "application/json",
+              credentials: "include",
             },
           });
         }
@@ -50,6 +51,7 @@ export const fethcPopsongExtended = fetchVerifyToken({
   baseUrl: `${SERVER_URL}`,
   headers: {
     "Content-Type": "application/json",
+    credentials: "include",
   },
 });
 
