@@ -47,7 +47,7 @@ https://github.com/lemony452/day-pop/assets/109330624/9051f957-f666-4279-a143-8f
 
 `Return-Fetch`
   - 401 응답 코드를 확인하고 액세스 토큰을 재발급해 해당 요청을 재시도하기 위한 intercepter 구현을 목적으로 사용했습니다
-  - 약 65kB로 타 라이브러리보다 가벼우면서 nextjs에서 제공하는 fetch의 장점을 해치지 않고 사용할 있었습니다
+  - 약 65kB로 타 라이브러리보다 가벼우면서 nextjs에서 제공하는 fetch의 장점을 해치지 않고 사용할 수 있었습니다
 
 `cookies-next`
   - jwt 토큰을 쿠키에 저장하고 사용하는데 서버 & 클라이언트 컴포넌트 모두 접근이 가능합니다
@@ -97,12 +97,12 @@ Nextjs의 미들웨어는 캐시 전, 요청 전에 실행되어 리다이렉트
 ### return-fetch로 코드의 안정성과 재사용성 높이기
 
 모든 API 요청을 fetch로 구현하다보니 중복된 코드가 많아졌고, 그만큼 실수에 대한 위험도도 높고 유지보수도 까다로운 코드가 되었습니다  
-또한 모든 요청 전에 토큰 검증을 하다보니 비효율적으로 느껴졌습니다 이러한 문제를 해결하면서 Nextjs에서 제공하는 fetch의 장점도 취할 수 있는 방법을 찾다 return-fetch 라이브러리를 선택하였습니다
+또한 모든 요청 전에 토큰 검증을 하다보니 비효율적으로 느껴졌습니다 이러한 문제를 해결하면서 Nextjs에서 제공하는 fetch의 장점도 취할 수 있는 방법을 찾다 return-fetch 라이브러리를 선택하였습니다  
 
-return-fetch는 전역 fetch를 건드리지 않고 Axios처럼 baseUrl, header과 같은 기본적인 설정을 할 수 있습니다
-또한 interceptor를 사용해 토큰 재발급 과정을 추가하고 재발급한 토큰으로 해당 요청을 다시 실행할 수 있었습니다
-토큰을 검증하는 `fetchVerifyToken` 함수와 공통 api 요청을 하는 `fethcPopsongExtended` 함수 2가지를 정의했습니다
-기존의 useEffect로 토큰을 검증한 코드들과 createAsyncThunk에 사용했던 각각의 api 요청 함수들 모두 위의 두 함수들로 줄일 수 있었습니다
+return-fetch는 전역 fetch를 건드리지 않고 Axios처럼 baseUrl, header과 같은 기본적인 설정을 할 수 있습니다  
+또한 interceptor를 사용해 토큰 재발급 과정을 추가하고 재발급한 토큰으로 해당 요청을 다시 실행할 수 있었습니다  
+토큰을 검증하는 `fetchVerifyToken` 함수와 공통 api 요청을 하는 `fethcPopsongExtended` 함수 2가지를 정의했습니다  
+기존의 useEffect로 토큰을 검증한 코드들과 createAsyncThunk에 사용했던 각각의 api 요청 함수들 모두 위의 두 함수들로 줄일 수 있었습니다  
 
 
 ```js
