@@ -30,9 +30,15 @@ export default async function MyplaylistPage() {
   const tokenInfo = await getSpotifyRefresh(spotify_refresh_token.value);
 
   const playlist = await getMyPlaylist(tokenInfo.access_token);
-  const myplaylist = playlist.items[0].tracks;
+  const myplaylist = playlist.items?.map((item) => item.tracks) || [];
 
-  const tracksInfo = await getTracks(tokenInfo.access_token, myplaylist.href);
+  let tracksInfo = [];
+  if (myplaylist.length) {
+    for (let playlist of myplaylist) {
+      res = await getTracks(tokenInfo.access_token, playlist.href);
+      tracksInfo.push([...res]);
+    }
+  }
 
   return (
     <section className={styles.myplaylist}>
@@ -48,17 +54,21 @@ export default async function MyplaylistPage() {
             <div>Time</div>
           </div>
           <ul>
-            {tracksInfo.items.map((trackInfo) => (
-              <Link
-                href={{
-                  pathname: "/detail",
-                  query: { trackId: trackInfo.track.id },
-                }}
-                key={trackInfo.track.id}
-              >
-                <MyPlaylistItem trackInfo={trackInfo}></MyPlaylistItem>
-              </Link>
-            ))}
+            {tracksInfo.length > 0 ? (
+              tracksInfo.items.map((trackInfo) => (
+                <Link
+                  href={{
+                    pathname: "/detail",
+                    query: { trackId: trackInfo.track.id },
+                  }}
+                  key={trackInfo.track.id}
+                >
+                  <MyPlaylistItem trackInfo={trackInfo}></MyPlaylistItem>
+                </Link>
+              ))
+            ) : (
+              <div>플레이리스트에 팝송을 추가해주세요</div>
+            )}
           </ul>
         </div>
       </div>
