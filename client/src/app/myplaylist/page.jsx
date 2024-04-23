@@ -31,10 +31,7 @@ export default async function MyplaylistPage() {
 
   const playlist = await getMyPlaylist(tokenInfo.access_token);
   const myplaylist = playlist.itmes[0].tracks;
-  let tracksInfo = [];
-  if (myplaylist.total > 0) {
-    tracksInfo = await getTracks(tokenInfo.access_token, myplaylist.href);
-  }
+  const tracksInfo = await getTracks(tokenInfo.access_token, myplaylist.href);
 
   return (
     <section className={styles.myplaylist}>
