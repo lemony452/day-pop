@@ -20,7 +20,13 @@ export default async function Home() {
           좋아하는 팝송을 들으며 영어 공부를 할 수 있어요 😀
         </p>
         <Button isLogin={true} className={styles.loginBtn}>
-          로그인
+          <Image
+            src="/SpotifyLogo.png"
+            alt="spotify logo img"
+            width={30}
+            height={30}
+          ></Image>
+          <div>스포티파이 로그인하기</div>
         </Button>
       </div>
     </section>
