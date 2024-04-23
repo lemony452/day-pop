@@ -22,14 +22,20 @@
 }
 
 .loginBtn {
-  width: 6em;
-  height: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-decoration: none;
   background-color: var(--blue);
   color: white;
   text-align: center;
-  line-height: 50px;
-  font-size: 1.5rem;
+  font-size: 1rem;
   border-radius: 10px;
   margin-top: 30px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.loginBtn:hover {
+  background-color: #0f21c4;
 }
