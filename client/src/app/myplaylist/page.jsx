@@ -46,23 +46,19 @@ export default async function MyplaylistPage() {
             <div>Album</div>
             <div>Time</div>
           </div>
-          {tracksInfo.length > 0 ? (
-            <ul>
-              {tracksInfo.items.map((trackInfo) => (
-                <Link
-                  href={{
-                    pathname: "/detail",
-                    query: { trackId: trackInfo.track.id },
-                  }}
-                  key={trackInfo.track.id}
-                >
-                  <MyPlaylistItem trackInfo={trackInfo}></MyPlaylistItem>
-                </Link>
-              ))}
-            </ul>
-          ) : (
-            <ul>플레이리스트에 팝송을 추가해주세요</ul>
-          )}
+          <ul>
+            {tracksInfo.items.map((trackInfo) => (
+              <Link
+                href={{
+                  pathname: "/detail",
+                  query: { trackId: trackInfo.track.id },
+                }}
+                key={trackInfo.track.id}
+              >
+                <MyPlaylistItem trackInfo={trackInfo}></MyPlaylistItem>
+              </Link>
+            ))}
+          </ul>
         </div>
       </div>
     </section>
