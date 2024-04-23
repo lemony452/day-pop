@@ -30,13 +30,10 @@ export default async function MyplaylistPage() {
   const tokenInfo = await getSpotifyRefresh(spotify_refresh_token.value);
 
   const playlist = await getMyPlaylist(tokenInfo.access_token);
-  const myplaylist = playlist.items?.map((item) => item.tracks) || [];
+  const myplaylist = playlist.itmes[0].tracks;
   let tracksInfo = [];
-  if (myplaylist.length) {
-    for (let playlist of myplaylist) {
-      res = await getTracks(tokenInfo.access_token, playlist.href);
-      tracksInfo.push([...res]);
-    }
+  if (myplaylist.total > 0) {
+    tracksInfo = await getTracks(tokenInfo.access_token, myplaylist.href);
   }
 
   return (
