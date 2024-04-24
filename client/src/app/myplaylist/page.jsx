@@ -10,10 +10,13 @@ const HEADERS = (access_token) => {
   };
 };
 
-const getMyPlaylist = async (access_token) => {
-  const res = await fetch("https://api.spotify.com/v1/me/playlists", {
-    headers: HEADERS(access_token),
-  });
+const getMyPlaylist = async (access_token, limit) => {
+  const res = await fetch(
+    `https://api.spotify.com/v1/me/playlists?limit=${limit}`,
+    {
+      headers: HEADERS(access_token),
+    }
+  );
 
   return await res.json();
 };
@@ -29,16 +32,22 @@ export default async function MyplaylistPage() {
 
   const tokenInfo = await getSpotifyRefresh(spotify_refresh_token.value);
 
-  const playlist = await getMyPlaylist(tokenInfo.access_token);
-  const myplaylist = playlist.items[0].tracks;
-  const tracksInfo = await getTracks(tokenInfo.access_token, myplaylist.href);
+  const playlist = await getMyPlaylist(tokenInfo.access_token, 3);
+  const myplaylist = playlist.items.map((item) => item.tracks);
+  let tracksInfo = [];
+  for (let playlist of myplaylist) {
+    if (playlist.total > 0) {
+      const res = await getTracks(tokenInfo.access_token, playlist.href);
+      tracksInfo.push(...res.items);
+    }
+  }
 
   return (
     <section className={styles.myplaylist}>
       <div className={styles["myplaylist-wrapper"]}>
         <div className={styles["myplaylist-header"]}>
           <div className={styles.name}>🎵 내 플레이리스트</div>
-          <div className={styles.total}>{myplaylist.total} 곡</div>
+          <div className={styles.total}>{tracksInfo.length} 곡</div>
         </div>
         <div className={styles["myplaylist-flex"]}>
           <div className={styles["myplaylist-flex-header"]}>
@@ -46,19 +55,25 @@ export default async function MyplaylistPage() {
             <div>Album</div>
             <div>Time</div>
           </div>
-          <ul>
-            {tracksInfo.items.map((trackInfo) => (
-              <Link
-                href={{
-                  pathname: "/detail",
-                  query: { trackId: trackInfo.track.id },
-                }}
-                key={trackInfo.track.id}
-              >
-                <MyPlaylistItem trackInfo={trackInfo}></MyPlaylistItem>
-              </Link>
-            ))}
-          </ul>
+          {tracksInfo.length > 0 ? (
+            <ul>
+              {tracksInfo.map((trackInfo) => (
+                <Link
+                  href={{
+                    pathname: "/detail",
+                    query: { trackId: trackInfo.track.id },
+                  }}
+                  key={trackInfo.track.id}
+                >
+                  <MyPlaylistItem trackInfo={trackInfo}></MyPlaylistItem>
+                </Link>
+              ))}
+            </ul>
+          ) : (
+            <div className={styles["item-empty"]}>
+              스포티파이 플레이리스트에 팝송을 추가해주세요
+            </div>
+          )}
         </div>
       </div>
     </section>
