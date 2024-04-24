@@ -5,7 +5,9 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "start:production": "env-cmd -f .env.production nodemon app.js",
+    "start:development": "env-cmd -f .env.development nodemon app.js",
+    "start:local": "env-cmd -f .env.local nodemon app.js"
   },
   "author": "",
   "license": "ISC",
@@ -13,10 +15,11 @@
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
+    "env-cmd": "^10.1.0",
     "express": "^4.19.1",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.2.3",
-    "request": "^2.88.2",
-    "nodemon": "^3.1.0"
+    "nodemon": "^3.1.0",
+    "request": "^2.88.2"
   }
 }

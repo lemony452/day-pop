@@ -1,4 +1,14 @@
-require("dotenv").config();
+const dotenv = require("dotenv");
+if (process.env.NODE_ENV === "production") {
+  dotenv.config({ path: __dirname + ".env.production" });
+} else if (process.env.NODE_ENV === "development") {
+  dotenv.config({ path: __dirname + ".env.development" });
+} else {
+  dotenv.config({ path: __dirname + ".env.local" });
+}
+
+// console.log("환경 : ", process.env.NODE_ENV);
+// console.log("클라이언트 도메인 : ", process.env.CLIENT_DOMAIN);
 // express server setting
 const express = require("express");
 const connectServer = require("./server");
