@@ -1,11 +1,10 @@
 const mongoose = require("mongoose");
 
-const LOCAL_MONGODB_URI = process.env.LOCAL_MONGODB_URI;
-const MONGODB_URI = process.env.MONGODB_URI;
+const MONGODB_URL = process.env.MONGODB_URL;
 
 const connectServer = () => {
   mongoose
-    .connect(MONGODB_URI)
+    .connect(MONGODB_URL)
     .then(() => {
       console.log("Mongoose Connected");
     })
