@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 
-export default function Button({ children, isLogin = false, ...props }) {
+export default function Btn({ children, isLogin = false, ...props }) {
   const router = useRouter();
   const handleLogin = async () => {
     if (isLogin) {

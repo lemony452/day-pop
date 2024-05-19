@@ -41,7 +41,7 @@ button {
   background-color: transparent;
 }
 
-main {
+.home-container {
   height: 100%;
 }
 
@@ -108,12 +108,12 @@ dialog::backdrop {
   font-size: 2rem;
 }
 
-.not-found a {
+.playlist-page-link {
   text-decoration: none;
   color: var(--blue);
   font-size: 1rem;
 }
 
-.not-found a:hover {
+.playlist-page-link:hover {
   color: #101fac;
 }

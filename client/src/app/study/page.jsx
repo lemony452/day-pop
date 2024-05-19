@@ -24,7 +24,7 @@ export default async function PopsongStudyPage({ searchParams }) {
   };
 
   return (
-    <section className={styles["study-section"]}>
+    <section className={styles["study-container"]}>
       <div className={styles["study-wrapper"]}>
         <StudyContent trackId={trackId} />
       </div>

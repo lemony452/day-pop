@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import Button from "./btn";
-import styles from "./header.module.css";
+import Button from "./Btn";
+import styles from "./Header.module.css";
 import Link from "next/link";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { usePathname } from "next/navigation";
@@ -43,7 +43,9 @@ export default function Nav() {
       {pathName !== "/study" && pathName !== "/myplaylist" && (
         <>
           <Link href="/myplaylist">
-            <Button className={`${styles.button} ${styles.toMain}`}>
+            <Button
+              className={`${styles["nav-btn"]} ${styles["playlist-page-link"]}`}
+            >
               플레이리스트로 돌아가기
             </Button>
           </Link>
@@ -52,12 +54,12 @@ export default function Nav() {
       {pathName === "/study" && (
         <button
           onClick={handleFinishStudy}
-          className={`${styles.button} ${styles.studyOver}`}
+          className={`${styles["nav-btn"]} ${styles["study-over"]}`}
         >
           학습 종료
         </button>
       )}
-      <button onClick={handleOpenMypage} className={styles.menu}>
+      <button onClick={handleOpenMypage} className={styles["menu-icon"]}>
         <Image src="/menu.png" alt="sidebar menu" width={30} height={30} />
       </button>
     </div>

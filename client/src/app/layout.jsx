@@ -1,9 +1,9 @@
-import Header from "@/components/header";
+import Header from "@/components/Header";
 import "./globals.css";
 import { Bagel_Fat_One, Nanum_Gothic } from "next/font/google";
 import StoreProvider from "./StoreProvider";
-import Modal from "@/components/modal";
-import MyPage from "@/components/mypage";
+import Modal from "@/components/Modal";
+import MyPage from "@/components/Mypage";
 
 export const fat = Bagel_Fat_One({
   subsets: ["latin"],
@@ -37,7 +37,7 @@ export default function RootLayout({ children }) {
           <Modal></Modal>
           <MyPage />
           <Header />
-          <main>{children}</main>
+          <main className="home-container">{children}</main>
         </StoreProvider>
       </body>
     </html>

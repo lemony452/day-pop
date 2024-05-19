@@ -1,6 +1,6 @@
 "use client";
 
-import Button from "@/components/btn";
+import Button from "@/components/Btn";
 import { signup } from "@/lib/auth";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -37,29 +37,41 @@ export default function SignupForm({ styles, spotifyId }) {
     <form
       ref={formRef}
       onSubmit={handleSignup}
-      className={styles["signup-box"]}
+      className={styles["signup-contents-container"]}
     >
-      <p>
-        <label htmlFor="id">ID</label>
+      <p className={styles["signup-id-wrapper"]}>
+        <label className={styles["signup-id-label"]} htmlFor="id">
+          ID
+        </label>
         <input
+          className={styles["signup-id-input"]}
           type="text"
           name="id"
           id="id"
           placeholder="아이디를 입력해주세요"
         />
       </p>
-      <p>
-        <label htmlFor="id">Nickname</label>
+      <p className={styles["signup-nickname-wrapper"]}>
+        <label className={styles["signup-nickname-label"]} htmlFor="id">
+          Nickname
+        </label>
         <input
+          className={styles["signup-nickname-input"]}
           type="text"
           name="nickname"
           id="nickname"
           placeholder="닉네임을 입력해주세요"
         />
       </p>
-      <p>
-        <label htmlFor="passwordValue">Password</label>
+      <p className={styles["signup-password-wrapper"]}>
+        <label
+          className={styles["signup-password-label"]}
+          htmlFor="passwordValue"
+        >
+          Password
+        </label>
         <input
+          className={styles["signup-password-input"]}
           type="password"
           name="passwordValue"
           id="passwordValue"
@@ -68,7 +80,9 @@ export default function SignupForm({ styles, spotifyId }) {
         />
       </p>
       <Button className={styles["signup-btn"]}>회원가입</Button>
-      <Link href="/signup">로그인 하러 가기</Link>
+      <Link className={styles["login-page-link"]} href="/signup">
+        로그인 하러 가기
+      </Link>
     </form>
   );
 }

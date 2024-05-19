@@ -1,4 +1,4 @@
-.header {
+.head-container {
   width: 100%;
   position: fixed;
   top: 0;
@@ -6,7 +6,7 @@
   font-family: var(--font-fat);
 }
 
-.wraper {
+.head-wrapper {
   height: 64px;
   display: flex;
   justify-content: space-between;
@@ -14,18 +14,18 @@
   padding: 0 20px;
 }
 
-.logo {
+.head-logo {
   font-size: var(--logo);
   color: white;
 
   text-decoration: none;
 }
 
-.menu {
+.menu-icon {
   cursor: pointer;
 }
 
-.button {
+.nav-btn {
   height: 40px;
   padding: 5px 10px;
   font-family: var(--font-fat);
@@ -38,11 +38,11 @@
   cursor: pointer;
 }
 
-.studyOver {
+.study-over {
   background-color: var(--red);
 }
 
-.toMain {
+.playlist-page-link {
   background-color: var(--blue);
 }
 

@@ -3,6 +3,7 @@
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { studyActions } from "@/lib/study/studySlice";
 import { useRef } from "react";
+import styles from "./page.module.css";
 
 export default function SentenceInput() {
   const dispatch = useAppDispatch();
@@ -18,6 +19,7 @@ export default function SentenceInput() {
   return (
     <form onSubmit={onCheckSentence}>
       <input
+        className={styles["study-lyircs-input"]}
         ref={inputRef}
         name="sentence"
         type="text"

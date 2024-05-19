@@ -3,7 +3,7 @@
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { closeModal } from "@/lib/modal/modalSlice";
 import { useRef } from "react";
-import styles from "./modal.module.css";
+import styles from "./Modal.module.css";
 import { fat } from "@/app/layout";
 
 export default function Modal() {
@@ -15,8 +15,8 @@ export default function Modal() {
   else dialogRef.current?.close();
 
   return (
-    <dialog open={isOpen} ref={dialogRef} className={styles.modal}>
-      <p className={`${styles.content} ${fat.variable}`}>{content}</p>
+    <dialog open={isOpen} ref={dialogRef} className={styles["modal-container"]}>
+      <p className={`${styles["modal-content"]} ${fat.variable}`}>{content}</p>
       <button
         onClick={() => {
           dialogRef.current.close();

@@ -43,22 +43,27 @@ export default async function MyplaylistPage() {
   }
 
   return (
-    <section className={styles.myplaylist}>
+    <section className={styles["myplaylist-container"]}>
       <div className={styles["myplaylist-wrapper"]}>
         <div className={styles["myplaylist-header"]}>
-          <div className={styles.name}>🎵 내 플레이리스트</div>
-          <div className={styles.total}>{tracksInfo.length} 곡</div>
+          <div className={styles["myplaylist-header-title"]}>
+            🎵 내 플레이리스트
+          </div>
+          <div className={styles["myplaylist-header-cnt"]}>
+            {tracksInfo.length} 곡
+          </div>
         </div>
-        <div className={styles["myplaylist-flex"]}>
-          <div className={styles["myplaylist-flex-header"]}>
+        <div className={styles["myplaylist-contents"]}>
+          <div className={styles["myplaylist-contents-header"]}>
             <div>Title</div>
             <div>Album</div>
             <div>Time</div>
           </div>
           {tracksInfo.length > 0 ? (
-            <ul>
+            <ul className={styles["myplaylist-items-container"]}>
               {tracksInfo.map((trackInfo) => (
                 <Link
+                  className={styles["myplaylist-item-row"]}
                   href={{
                     pathname: "/detail",
                     query: { trackId: trackInfo.track.id },
@@ -70,7 +75,7 @@ export default async function MyplaylistPage() {
               ))}
             </ul>
           ) : (
-            <div className={styles["item-empty"]}>
+            <div className={styles["myplaylist-items-empty"]}>
               스포티파이 플레이리스트에 팝송을 추가해주세요
             </div>
           )}

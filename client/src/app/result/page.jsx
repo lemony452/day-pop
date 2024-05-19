@@ -1,4 +1,4 @@
-import Card from "@/components/card";
+import Card from "@/components/Card";
 import styles from "./page.module.css";
 import { fat } from "@/app/layout";
 import { getPopsongInfo, getTrackInfo } from "@/lib/play";
@@ -22,7 +22,7 @@ export default async function ResultPage({ searchParams }) {
   };
 
   return (
-    <section className={styles["result-section"]}>
+    <section className={styles["result-container"]}>
       <ResultInfo
         cardInfo={cardInfo}
         trackId={trackId}

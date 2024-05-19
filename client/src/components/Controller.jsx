@@ -67,7 +67,7 @@ export default function Controller({
   }, [isPaused, setPosition, player]);
 
   return (
-    <div className={styles["player-control"]}>
+    <div className={styles["player-controller-container"]}>
       <button
         className="btn-spotify"
         onClick={() => {

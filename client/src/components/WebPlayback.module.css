@@ -1,4 +1,4 @@
-.player {
+.player-container {
   position: fixed;
   left: 0;
   bottom: 0;
@@ -26,7 +26,7 @@
   gap: 10px;
 }
 
-.album {
+.album-img {
   width: 100px;
   height: 100px;
   border-radius: 5px;

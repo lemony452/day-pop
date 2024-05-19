@@ -1,9 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import styles from "./header.module.css";
+import styles from "./Header.module.css";
 import { fat } from "@/app/layout";
-import Nav from "./navbar";
+import Nav from "./Navbar";
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { getCookie } from "cookies-next";
@@ -21,9 +21,9 @@ export default function Header() {
 
   if (isClient) {
     return (
-      <header className={`${styles.header} ${fat.variable}`}>
-        <div className={styles.wraper}>
-          <Link href="/" className={styles.logo}>
+      <header className={`${styles["head-container"]} ${fat.variable}`}>
+        <div className={styles["head-wrapper"]}>
+          <Link href="/" className={styles["head-logo"]}>
             Day POP
           </Link>
           {isLogin && <Nav />}
