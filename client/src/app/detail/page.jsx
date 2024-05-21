@@ -2,7 +2,7 @@ import Link from "next/link";
 import { cookies } from "next/headers";
 import styles from "./page.module.css";
 
-import Card from "@/components/card";
+import Card from "@/components/Card";
 import { getSpotifyRefresh, getRefresh } from "@/lib/auth";
 import { getLyrics, getPopsongInfo, getTrackInfo } from "@/lib/play";
 import StartStudy from "./start-study";

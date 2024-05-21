@@ -22,7 +22,7 @@ export default function Result({ styles, trackId }) {
       <div className={styles["result-info"]}>
         {isStudy && result.grade === "-" ? "진행률" : "Rank"}
       </div>
-      <div className={styles["result"]}>
+      <div className={styles["result-grade-value"]}>
         {isStudy && result.grade === "-" ? `${progress}%` : result.grade}
       </div>
     </div>

@@ -11,7 +11,9 @@ export default function NotFound() {
         height={80}
       ></Image>
       <h1>404 Not Found</h1>
-      <Link href="/myplaylist">플레이리스트로 돌아가기</Link>
+      <Link className="playlist-page-link" href="/myplaylist">
+        플레이리스트로 돌아가기
+      </Link>
     </div>
   );
 }

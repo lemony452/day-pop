@@ -7,24 +7,24 @@ export default function MyPlaylistItem({ trackInfo }) {
   let seconds = duration % 60;
 
   return (
-    <li className={styles.item}>
-      <div className={styles["item-title"]}>
+    <li className={styles["myplaylist-item-container"]}>
+      <div className={styles["myplaylist-item-title"]}>
         <Image
           src={trackInfo.track.album.images[0].url}
           alt="album img"
           width={70}
           height={70}
-          className={styles["item-image"]}
+          className={styles["myplaylist-item-image"]}
         ></Image>
         <div className={styles["item-title-box"]}>
-          <div className={styles["item-name"]}>{trackInfo.track.name}</div>
-          <div className={styles["item-artist"]}>
-            {trackInfo.track.artists[0].name}
+          <div className={styles["myplaylist-item-name"]}>
+            {trackInfo.track.name}
           </div>
+          <div>{trackInfo.track.artists[0].name}</div>
         </div>
       </div>
-      <div className={styles["item-album"]}>{trackInfo.track.album.name}</div>
-      <div className={styles["item-time"]}>
+      <div>{trackInfo.track.album.name}</div>
+      <div>
         {minute}:{seconds < 10 ? "0" + String(seconds) : seconds}
       </div>
     </li>

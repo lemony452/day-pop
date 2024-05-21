@@ -69,12 +69,12 @@ export default function WebPlayback({ access_token, cardInfo }) {
 
   return (
     <>
-      <section className={styles.player}>
+      <section className={styles["player-container"]}>
         <div className={styles["player-wrapper"]}>
           <div className={styles["player-info"]}>
             <Image
               src={cardInfo.trackImgSrc}
-              className={styles.album}
+              className={styles["album-img"]}
               alt="album image"
               width={100}
               height={100}

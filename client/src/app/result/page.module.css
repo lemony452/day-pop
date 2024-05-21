@@ -1,4 +1,4 @@
-.result-section {
+.result-container {
   width: 100%;
   padding-top: 150px;
 }
@@ -45,14 +45,14 @@
   gap: 30px;
 }
 
-.rating {
+.result-rating {
   display: flex;
   gap: 30px;
   justify-content: center;
   align-items: center;
 }
 
-.rating ul {
+.result-rating-list-container {
   position: absolute;
   left: 10px;
   bottom: 0;
@@ -62,7 +62,7 @@
   padding-left: 0;
 }
 
-.rating ul li {
+.result-rating-item {
   font-family: var(--font-fat);
   font-size: 2rem;
   -webkit-text-stroke: 1px #636363;
@@ -94,7 +94,7 @@
   text-align: center;
 }
 
-.result-grade {
+.result-rank-container {
   position: absolute;
   right: -50px;
   top: -50px;
@@ -111,10 +111,10 @@
   gap: 10px;
 }
 
-.result-info {
+.result-rank-label {
   font-size: 1.25rem;
 }
 
-.result {
+.result-rank-value {
   font-size: 2.5rem;
 }

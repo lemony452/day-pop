@@ -1,4 +1,4 @@
-.myplaylist {
+.myplaylist-container {
   padding-top: 140px;
 }
 
@@ -17,31 +17,31 @@
   width: 100%;
 }
 
-.name {
+.myplaylist-header-title {
   font-size: 2rem;
 }
 
-.total {
+.myplaylist-header-cnt {
   font-size: 1.5rem;
 }
 
-.myplaylist-flex {
+.myplaylist-contents {
   margin-top: 40px;
   width: 100%;
   display: flex;
   flex-direction: column;
 }
 
-.myplaylist-flex ul {
+.myplaylist-items-container {
   max-height: 500px;
   overflow-y: scroll;
 }
 
-.myplaylist-flex ul a {
+.myplaylist-item-row {
   text-decoration: none;
 }
 
-.myplaylist-flex-header {
+.myplaylist-contents-header {
   display: grid;
   grid-template-columns: 4fr 2fr 1fr;
   border-bottom: 1px solid white;
@@ -49,7 +49,7 @@
   padding: 0 10px 10px 10px;
 }
 
-.item {
+.myplaylist-item-container {
   display: grid;
   grid-template-columns: 4fr 2fr 1fr;
   padding: 10px;
@@ -57,29 +57,29 @@
   align-items: center;
 }
 
-.item:hover {
+.myplaylist-item-container:hover {
   background-color: #262626;
   border-radius: 5px;
   cursor: pointer;
 }
 
-.item-image {
+.myplaylist-item-image {
   border-radius: 5px;
 }
 
-.item-title {
+.myplaylist-item-title {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.item-name {
+.myplaylist-item-name {
   font-size: 1.25rem;
   margin-bottom: 10px;
   color: white;
 }
 
-.item-empty {
+.myplaylist-items-empty {
   position: absolute;
   left: 50%;
   top: 50%;

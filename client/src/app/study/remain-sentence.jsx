@@ -7,9 +7,9 @@ import { useAppSelector } from "@/lib/hooks";
 export default function RemainSentence() {
   const { studying, popsongInfo } = useAppSelector((state) => state.study);
   return (
-    <div className={`${styles.remain} ${fat.variable}`}>
+    <div className={`${styles["progress-wrapper"]} ${fat.variable}`}>
       학습 진행률{" "}
-      <span>
+      <span className={styles["progress-ratio"]}>
         {studying.sentenceIdx + 1 || 1} /{" "}
         {popsongInfo.originalLyrics.length || 1}
       </span>

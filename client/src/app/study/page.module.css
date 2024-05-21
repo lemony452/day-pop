@@ -1,4 +1,4 @@
-.study-section {
+.study-container {
   width: 100%;
   padding-top: 100px;
 }
@@ -12,7 +12,7 @@
   gap: 100px;
 }
 
-.remain {
+.progress-wrapper {
   height: 60px;
   background-color: var(--green);
   font-size: 1.5rem;
@@ -25,11 +25,11 @@
   font-family: var(--font-fat);
 }
 
-.remain span {
+.progress-ratio {
   margin-left: 10px;
 }
 
-.study-wrapper input {
+.study-lyircs-input {
   border: 1px solid #636363;
   width: 600px;
   height: 40px;
@@ -40,11 +40,11 @@
   margin-top: 50px;
 }
 
-.study-wrapper input::placeholder {
+.study-lyircs-input::placeholder {
   color: #858585;
 }
 
-.study-box {
+.study-contents-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -78,7 +78,7 @@
   }
 }
 
-.rating {
+.study-lyrics-rating {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -91,7 +91,7 @@
   animation-duration: 1s;
 }
 
-.lyrics {
+.study-current-lyrics {
   display: flex;
   overflow-y: scroll;
   font-size: 1.5rem;
@@ -100,6 +100,6 @@
   gap: 20px;
 }
 
-.lyrics div {
-  /* border-bottom: 1px solid white; */
-}
+/* .study-current-lyrics div { */
+/* border-bottom: 1px solid white; */
+/* } */

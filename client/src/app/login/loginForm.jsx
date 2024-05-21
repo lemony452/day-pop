@@ -1,6 +1,6 @@
 "use client";
 
-import Button from "@/components/btn";
+import Button from "@/components/Btn";
 import { login } from "@/lib/auth";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -34,19 +34,32 @@ export default function LoginForm({ styles }) {
   };
 
   return (
-    <form ref={formRef} onSubmit={handleLogin} className={styles["login-box"]}>
-      <p>
-        <label htmlFor="id">ID</label>
+    <form
+      ref={formRef}
+      onSubmit={handleLogin}
+      className={styles["login-contents"]}
+    >
+      <p className={styles["login-id-wrapper"]}>
+        <label className={styles["login-id-label"]} htmlFor="id">
+          ID
+        </label>
         <input
+          className={styles["login-id-input"]}
           type="text"
           name="id"
           id="id"
           placeholder="아이디를 입력해주세요"
         />
       </p>
-      <p>
-        <label htmlFor="passwordValue">Password</label>
+      <p className={styles["login-password-wrapper"]}>
+        <label
+          className={styles["login-password-label"]}
+          htmlFor="passwordValue"
+        >
+          Password
+        </label>
         <input
+          className={styles["login-password-input"]}
           type="password"
           name="passwordValue"
           id="passwordValue"
@@ -55,7 +68,9 @@ export default function LoginForm({ styles }) {
         />
       </p>
       <Button className={styles["login-btn"]}>로그인</Button>
-      <Link href="/signup">회원가입 하러 가기</Link>
+      <Link className={styles["signup-page-link"]} href="/signup">
+        회원가입 하러 가기
+      </Link>
     </form>
   );
 }

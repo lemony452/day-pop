@@ -12,16 +12,16 @@ export default function Result() {
     popsongInfo.originalLyrics[studying.sentenceIdx]?.split(" ") || [];
 
   return (
-    <div className={styles["study-box"]}>
+    <div className={styles["study-contents-container"]}>
       {studying.grade && (
         <div
           key={studying.sentenceIdx}
-          className={`${styles.rating} ${fat.variable} ${studying.grade}`}
+          className={`${styles["study-lyrics-rating"]} ${fat.variable} ${studying.grade}`}
         >
           {studying.grade}
         </div>
       )}
-      <div className={styles.lyrics}>
+      <div className={styles["study-current-lyrics"]}>
         {hintArr.map((word, idx) =>
           word.length > 0 ? (
             <div key={idx}>

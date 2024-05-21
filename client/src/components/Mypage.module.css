@@ -1,4 +1,4 @@
-.mypage-wrapper {
+.mypage-container {
   width: 300px;
   height: 100vh;
   background-color: #1f1f1f;
@@ -21,7 +21,7 @@
   display: none;
 }
 
-.top {
+.mypage-head {
   font-family: var(--font-fat);
   font-size: 1.75rem;
 
@@ -31,7 +31,7 @@
   margin-bottom: 50px;
 }
 
-.close-button {
+.close-icon {
   cursor: pointer;
 }
 
@@ -42,7 +42,7 @@
   margin-bottom: 50px;
 }
 
-.nickname {
+.user-nickname {
   font-size: 1.75rem;
   display: flex;
   justify-content: space-between;
@@ -52,33 +52,33 @@
   border-bottom: 1px solid #fff;
 }
 
-.total {
+.popsong-total-wrapper {
   font-size: 1.25rem;
   line-height: 30px;
   color: var(--gray);
 }
 
-.total span {
+.popsong-total-cnt {
   color: #fff;
   font-size: 1.5rem;
   font-weight: 700;
 }
 
-.rank {
+.user-rank-wrapper {
   font-size: 1.25rem;
   display: flex;
   flex-direction: column;
   margin-bottom: 30px;
 }
 
-.rank span:nth-child(1) {
+.user-rank-label {
   font-weight: 700;
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.rank span:nth-child(2) {
+.user-rank-value {
   font-size: 4rem;
   margin-left: 40px;
   font-family: var(--font-fat);
@@ -88,12 +88,12 @@
   text-shadow: 4px 4px 2px #b1b1b1;
 }
 
-.history {
+.popsonglist-history {
   width: 100%;
   font-size: 1.25rem;
 }
 
-.history span {
+.popsonglist-history-label {
   font-weight: 700;
   display: flex;
   align-items: center;
@@ -101,20 +101,20 @@
   margin-bottom: 20px;
 }
 
-.history ul {
+.popsonglist-wrapper {
   margin-left: 40px;
   overflow: scroll;
   white-space: nowrap;
 }
 
-.history li {
+.popsong-item {
   font-size: 1rem;
   list-style: none;
   line-height: 40px;
   color: var(--gray);
 }
 
-.logout {
+.logout-btn {
   position: fixed;
   bottom: 10px;
   right: 10px;
@@ -124,6 +124,6 @@
   cursor: pointer;
 }
 
-.logout:hover {
+.logout-btn:hover {
   color: #d71a1adc;
 }

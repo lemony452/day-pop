@@ -1,27 +1,27 @@
-.welcome {
+.welcome-container {
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.welcome div {
+.welcome-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.welcome .title {
+.welcome-title {
   margin-top: 30px;
   font-size: 2rem;
 }
 
-.welcome .subTitle {
+.welcome-sub-title {
   margin-top: 10px;
   font-size: 1.5rem;
 }
 
-.loginBtn {
+.login-btn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -36,6 +36,6 @@
   cursor: pointer;
 }
 
-.loginBtn:hover {
+.login-btn:hover {
   background-color: #0f21c4;
 }

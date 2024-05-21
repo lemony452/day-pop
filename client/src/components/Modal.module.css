@@ -1,9 +1,9 @@
-.modal {
+.modal-container {
   padding: 1rem 2rem;
   background: none;
 }
 
-.content {
+.modal-content {
   font-family: var(--font-fat);
   margin: 0;
   font-size: 2em;

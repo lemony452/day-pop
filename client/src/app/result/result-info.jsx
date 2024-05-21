@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { fetchPopsongById } from "@/lib/study/thunks";
 import { useEffect } from "react";
 import { fat } from "../layout";
-import Card from "@/components/card";
+import Card from "@/components/Card";
 
 export default function ResultInfo({ cardInfo, trackId, styles }) {
   const { studying, result } = useAppSelector((state) => state.study);
@@ -18,18 +18,28 @@ export default function ResultInfo({ cardInfo, trackId, styles }) {
     <div className={styles["result-wrapper"]}>
       <div className={`${styles["result-info"]} ${fat.variable}`}>
         <Card imgSize={400} cardInfo={cardInfo}>
-          <div className={styles.rating}>
-            <ul>
-              <li className="perfect">Perfect {studying.perfect}</li>
-              <li className="great">Great {studying.great}</li>
-              <li className="good">Good {studying.good}</li>
-              <li className="bad">Bad {studying.bad}</li>
-              <li className="miss">Miss {studying.miss}</li>
+          <div className={styles["result-rating"]}>
+            <ul className={styles["result-rating-list-container"]}>
+              <li className={`perfect ${styles["result-rating-item"]}`}>
+                Perfect {studying.perfect}
+              </li>
+              <li className={`great ${styles["result-rating-item"]}`}>
+                Great {studying.great}
+              </li>
+              <li className={`good ${styles["result-rating-item"]}`}>
+                Good {studying.good}
+              </li>
+              <li className={`bad ${styles["result-rating-item"]}`}>
+                Bad {studying.bad}
+              </li>
+              <li className={`miss ${styles["result-rating-item"]}`}>
+                Miss {studying.miss}
+              </li>
             </ul>
           </div>
-          <div className={styles["result-grade"]}>
-            <div className={styles["result-info"]}>Rank</div>
-            <div className={styles["result"]}>{result.grade}</div>
+          <div className={styles["result-rank-container"]}>
+            <div className={styles["result-rank-label"]}>Rank</div>
+            <div className={styles["result-rank-value"]}>{result.grade}</div>
           </div>
         </Card>
       </div>
